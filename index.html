@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HörenWeg — AI-промты для аудирования на немецком</title>
+<script>
+// Theme init (before CSS to prevent FOUC)
+(function(){
+  var t=localStorage.getItem('theme');
+  if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))
+    document.documentElement.classList.add('dark');
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ DESIGN SYSTEM ═══════════ */
+:root {
+  /* Light theme — warm white for better exercise contrast */
+  --bg:       #f0f2f8;
+  --bg2:      #e4e8f0;
+  --card:     #ffffff;
+  --border:   #e2e8f0;
+  --border2:  #cbd5e1;
+  --primary:  #2563eb;
+  --primary2: #1d4ed8;
+  --accent:   #7c3aed;
+  --green:    #16a34a;
+  --gold:     #d97706;
+  --rose:     #dc2626;
+  --text:     #1a1a2e;
+  --text2:    #334155;
+  --muted:    #718096;
+  --dim:      #94a3b8;
+
+  /* Grammar colors — adapted for light bg */
+  --gram-masc: #2563eb;  /* der = синий */
+  --gram-fem:  #dc2626;  /* die = красный */
+  --gram-neut: #16a34a;  /* das = зелёный */
+  --gram-verb: #7c3aed;  /* глагол = фиолетовый */
+
+  --radius: 12px;
+  --font: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ═══════════ LAYOUT ═══════════ */
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+/* ═══════════ HEADER ═══════════ */
+header {
+  position: relative;
+  padding: 28px 24px 22px;
+  text-align: center;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.flag { display: inline-flex; flex-direction: column; gap: 1px; border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+.flag span { display: block; width: 24px; height: 4px; }
+.f1{background:#1a1a1a} .f2{background:#c62828} .f3{background:#f9a825}
+
+h1 {
+  font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px;
+  color: var(--text); margin-bottom: 4px;
+}
+h1 span { color: var(--primary); }
+.sub { color: var(--muted); font-size: .82rem; margin: 0 auto; }
+
+/* Badges */
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.badge {
+  padding: 3px 11px; border-radius: 16px; font-size: .7rem; font-weight: 600;
+  border: 1px solid;
+}
+.b1{background:rgba(37,99,235,.06);color:var(--primary);border-color:rgba(37,99,235,.2)}
+.b2{background:rgba(217,119,6,.06);color:var(--gold);border-color:rgba(217,119,6,.18)}
+.b3{background:rgba(22,163,74,.06);color:var(--green);border-color:rgba(22,163,74,.18)}
+.b4{background:rgba(124,58,237,.06);color:var(--accent);border-color:rgba(124,58,237,.18)}
+.b5{background:rgba(220,38,38,.06);color:var(--rose);border-color:rgba(220,38,38,.18)}
+
+/* ═══════════ STATS ═══════════ */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 24px; }
+.scard {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+  transition: border-color .2s;
+}
+.scard:hover { border-color: var(--border2); }
+.sico { font-size: 1.2rem; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: rgba(37,99,235,.06); border-radius: 8px; }
+.slbl { font-size: .65rem; color: var(--dim); text-transform: uppercase; letter-spacing: .5px; }
+.sval { font-size: .82rem; font-weight: 600; }
+
+/* Section titles */
+.stitle {
+  font-size: .68rem; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px;
+  margin: 24px 0 12px; display: flex; align-items: center; gap: 10px;
+}
+.stitle::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+/* ═══════════ LESSON GRID (list view) ═══════════ */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.lcard {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px; cursor: pointer; transition: all .2s; text-decoration: none; color: inherit; display: block;
+}
+.lcard:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(37,99,235,.08); }
+.lcard-premium { border-color: rgba(217,119,6,.3); }
+.lcard-premium:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(217,119,6,.1); }
+.lcard-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.lnum {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff;
+  font-size: .8rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ltitle { font-size: 1rem; font-weight: 700; }
+.lmeta { font-size: .72rem; color: var(--dim); }
+.ltags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.ltag { font-size: .62rem; padding: 2px 8px; border-radius: 10px; background: rgba(37,99,235,.08); color: var(--muted); border: 1px solid rgba(37,99,235,.12); }
+
+/* ═══════════ LESSON DETAIL VIEW ═══════════ */
+#detail { display: none; }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--primary);
+  font-size: .82rem; font-weight: 600; text-decoration: none; margin-bottom: 16px;
+  cursor: pointer; background: none; border: none;
+}
+.back-btn:hover { color: var(--text); }
+
+.detail-head {
+  display: flex; align-items: center; gap: 14px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+.detail-num {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff;
+  font-size: 1rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.detail-title { font-size: 1.3rem; font-weight: 700; }
+.detail-meta { font-size: .74rem; color: var(--dim); }
+.detail-link {
+  margin-left: auto; flex-shrink: 0;
+  color: var(--primary); font-size: .72rem; text-decoration: none;
+  background: rgba(37,99,235,.07); border: 1px solid rgba(37,99,235,.2);
+  padding: 5px 12px; border-radius: 16px; white-space: nowrap;
+}
+.detail-link:hover { background: rgba(37,99,235,.12); color: var(--primary2); }
+.yt-link {
+  margin-left: auto; flex-shrink: 0;
+  color: #dc2626; font-size: .72rem; text-decoration: none; font-weight: 600;
+  background: rgba(220,38,38,.06); border: 1px solid rgba(220,38,38,.2);
+  padding: 5px 12px; border-radius: 16px; white-space: nowrap;
+  transition: all .2s; display: inline-flex; align-items: center; gap: 4px;
+}
+.yt-link:hover { background: rgba(220,38,38,.12); border-color: rgba(220,38,38,.4); }
+.yt-link svg { width: 14px; height: 14px; fill: #dc2626; }
+.lcard-yt {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: .62rem; color: #dc2626; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px;
+  background: rgba(220,38,38,.06); border: 1px solid rgba(220,38,38,.12);
+}
+.lcard-yt svg { width: 10px; height: 10px; fill: #dc2626; }
+
+/* ═══════════ TABS ═══════════ */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.tab-btn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 7px 12px; border-radius: 8px; font-size: .72rem; font-weight: 600;
+  background: var(--card); border: 1px solid var(--border); color: var(--muted);
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--border2); color: var(--text2); }
+.tab-btn.active { background: rgba(37,99,235,.1); border-color: var(--primary); color: var(--primary); }
+.tab-ico { font-size: .9rem; }
+
+/* Tab content */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Prompt card */
+.prompt-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden;
+}
+.prompt-instr {
+  padding: 14px 16px; font-size: .8rem; color: var(--text2); line-height: 1.5;
+  border-bottom: 1px solid var(--border); background: rgba(37,99,235,.03);
+}
+.prompt-instr strong { color: var(--primary); font-weight: 600; }
+.prompt-actions {
+  padding: 10px 16px; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  padding: 6px 14px; border-radius: 8px;
+  border: 1px solid var(--border2); background: rgba(37,99,235,.07);
+  color: var(--primary); font-size: .74rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.copy-btn:hover { background: rgba(37,99,235,.12); border-color: var(--primary); color: var(--primary2); }
+.copy-btn.ok { background: rgba(74,222,128,.12); border-color: var(--green); color: var(--green); }
+
+.prompt-body {
+  padding: 16px;
+  font-family: var(--mono); font-size: .73rem; line-height: 1.75;
+  color: var(--text2); white-space: pre-wrap; word-break: break-word;
+  max-height: 500px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--border2) transparent;
+}
+.prompt-body::-webkit-scrollbar { width: 5px; }
+.prompt-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ═══════════ TEXT VIEW (type 1) ═══════════ */
+.text-view { padding: 20px; font-size: 1.05rem; line-height: 1.8; }
+.text-view p { margin-bottom: 14px; }
+.vocab-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px;
+  margin-top: 16px;
+}
+.vocab-item {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; font-size: .78rem;
+}
+.vocab-de { font-weight: 700; }
+.vocab-de.masc { color: var(--gram-masc); }
+.vocab-de.fem { color: var(--gram-fem); }
+.vocab-de.neut { color: var(--gram-neut); }
+.vocab-ru { color: var(--muted); margin-left: 6px; }
+.vocab-ex { color: var(--dim); font-size: .7rem; margin-top: 3px; font-style: italic; }
+
+/* ═══════════ NAV ═══════════ */
+.lesson-nav {
+  display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.nav-btn {
+  color: var(--primary); font-size: .8rem; font-weight: 600; text-decoration: none;
+  cursor: pointer; background: none; border: none; padding: 6px 0;
+}
+.nav-btn:hover { color: var(--text); }
+.nav-btn:disabled { color: var(--dim); cursor: default; }
+
+/* ═══════════ FOOTER ═══════════ */
+footer {
+  text-align: center; padding: 24px 20px; color: var(--dim); font-size: .72rem;
+  border-top: 1px solid var(--border); margin-top: 40px;
+}
+footer a { color: var(--primary); text-decoration: none; }
+footer a:hover { color: var(--text); }
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 640px) {
+  h1 { font-size: 1.6rem; }
+  .tabs { gap: 3px; }
+  .tab-btn { padding: 6px 8px; font-size: .66rem; }
+  .grid { grid-template-columns: 1fr; }
+  .detail-link { display: none; }
+  .wmatch-grid { grid-template-columns: 1fr !important; }
+  .wmatch-col { min-height: auto; }
+}
+
+/* ═══════════ EXERCISES ═══════════ */
+.ex-accordion { margin-bottom: 10px; }
+.ex-accordion summary {
+  padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: .88rem;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  color: var(--text); list-style: none; display: flex; align-items: center; gap: 8px;
+  transition: all .2s;
+}
+.ex-accordion summary::-webkit-details-marker { display: none; }
+.ex-accordion summary::before { content: '▶'; font-size: .6rem; color: var(--dim); transition: transform .2s; }
+.ex-accordion[open] summary::before { transform: rotate(90deg); }
+.ex-accordion[open] summary { border-color: var(--primary); border-radius: var(--radius) var(--radius) 0 0; }
+.ex-accordion summary:hover { border-color: var(--border2); }
+.ex-body {
+  padding: 18px; border: 2px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius); background: #ffffff;
+}
+
+/* Progress bar */
+.ex-progress { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.ex-progress-bar { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.ex-progress-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width .3s; }
+.ex-progress-text { font-size: .72rem; color: var(--muted); white-space: nowrap; }
+
+/* Mode toggle */
+.ex-mode { display: flex; gap: 4px; margin-bottom: 12px; }
+.ex-mode-btn {
+  padding: 5px 14px; border-radius: 16px; font-size: .72rem; font-weight: 600;
+  border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer;
+}
+.ex-mode-btn.active { background: rgba(37,99,235,.12); border-color: var(--primary); color: var(--primary); }
+
+/* ── Vocab Quiz ── */
+.vq-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; text-align: center; margin-bottom: 12px;
+}
+.vq-word { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+.vq-hint { font-size: .76rem; color: var(--dim); margin-bottom: 16px; }
+.vq-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vq-opt {
+  padding: 12px; border-radius: 10px; font-size: .84rem; font-weight: 600;
+  border: 2px solid #a5b4fc; background: #eef2ff; color: #3730a3;
+  cursor: pointer; transition: all .2s; text-align: center;
+}
+.vq-opt:hover { border-color: #6366f1; background: #e0e7ff; transform: translateY(-1px); }
+.vq-opt.correct { background: #dcfce7; border-color: #16a34a; color: #15803d; font-weight: 700; animation: correctPulse .4s; }
+.vq-opt.wrong { background: #fee2e2; border-color: #dc2626; color: #b91c1c; animation: shake .4s; }
+.vq-opt:disabled { cursor: default; opacity: .7; }
+.vq-result { text-align: center; padding: 20px; font-size: .9rem; }
+.vq-result .score { font-size: 2rem; font-weight: 900; color: var(--primary); }
+
+/* ── Word Matching ── */
+.wmatch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.wmatch-col-title { font-size: .7rem; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; text-align: center; }
+.wmatch-word {
+  padding: 10px 14px; border-radius: 8px; font-size: .82rem; font-weight: 600;
+  cursor: pointer; transition: all .2s; text-align: center; margin-bottom: 6px;
+}
+.wmatch-word[data-side="de"] { border: 2px solid #93c5fd; background: #dbeafe; color: #1e40af; }
+.wmatch-word[data-side="de"]:hover { border-color: #3b82f6; background: #bfdbfe; }
+.wmatch-word[data-side="ru"] { border: 2px solid #fbbf24; background: #fef3c7; color: #92400e; }
+.wmatch-word[data-side="ru"]:hover { border-color: #d97706; background: #fde68a; }
+.wmatch-word.selected { border-color: #7c3aed !important; background: #ede9fe !important; color: #5b21b6 !important; box-shadow: 0 0 0 3px rgba(124,58,237,.25); }
+.wmatch-word.matched { background: #dcfce7 !important; border-color: #16a34a !important; color: #15803d !important; cursor: default; }
+.wmatch-word.wrong { animation: shake .4s; border-color: var(--rose); }
+
+/* ── Article Quiz ── */
+.aq-legend { display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.aq-legend-item { font-size: .72rem; display: flex; align-items: center; gap: 4px; }
+.aq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.aq-item {
+  background: #ffffff; border: 2px solid var(--border); border-radius: 10px;
+  padding: 14px; text-align: center;
+}
+.aq-item.solved { background: #f0fdf4; border-color: #4ade80; }
+.aq-noun { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.aq-trans { font-size: .74rem; color: var(--muted); margin-bottom: 8px; }
+.aq-btns { display: flex; gap: 6px; justify-content: center; }
+.aq-btn {
+  padding: 5px 14px; border-radius: 6px; font-size: .76rem; font-weight: 700;
+  border: 1px solid; cursor: pointer; transition: all .2s;
+}
+.aq-btn.der { color: #1d4ed8; border-color: #93c5fd; background: #dbeafe; }
+.aq-btn.die { color: #b91c1c; border-color: #fca5a5; background: #fee2e2; }
+.aq-btn.das { color: #15803d; border-color: #86efac; background: #dcfce7; }
+.aq-btn:hover { filter: brightness(1.2); }
+.aq-btn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #15803d !important; font-weight: 800; }
+.aq-btn.wrong { animation: shake .4s; }
+.aq-btn:disabled { cursor: default; opacity: .5; }
+
+/* ── Sentence Builder ── */
+.sb-card {
+  background: #ffffff; border: 2px solid var(--border); border-radius: 10px;
+  padding: 16px; margin-bottom: 12px;
+}
+.sb-card.done { border-color: #16a34a; background: #f0fdf4; }
+.sb-hint { font-size: .78rem; color: var(--muted); margin-bottom: 8px; font-style: italic; }
+.sb-num { font-size: .68rem; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
+.sb-result {
+  min-height: 44px; padding: 10px 12px; margin-bottom: 10px;
+  border: 2px dashed #93c5fd; border-radius: 8px; background: #eff6ff;
+  font-size: .84rem; color: var(--text); display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
+}
+.sb-result-word {
+  padding: 5px 10px; background: #2563eb; border-radius: 6px; font-size: .8rem; font-weight: 600;
+  cursor: pointer; color: #ffffff;
+}
+.sb-result-word:hover { background: #1d4ed8; }
+.sb-pool { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+.sb-frag {
+  padding: 7px 14px; border-radius: 8px; font-size: .82rem; font-weight: 600;
+  border: 2px solid #2563eb; background: #dbeafe; color: #1e40af;
+  cursor: pointer; transition: all .15s;
+}
+.sb-frag:hover { background: #bfdbfe; border-color: #1d4ed8; transform: translateY(-1px); }
+.sb-frag.used { opacity: .25; cursor: default; pointer-events: none; border-color: var(--border); background: var(--bg2); }
+.sb-actions { display: flex; gap: 6px; }
+.sb-btn {
+  padding: 4px 10px; border-radius: 6px; font-size: .7rem;
+  border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer;
+}
+.sb-btn:hover { border-color: var(--border2); color: var(--text); }
+.sb-feedback { font-size: .78rem; margin-top: 6px; }
+.sb-feedback.ok { color: var(--green); }
+.sb-feedback.err { color: var(--rose); }
+.sb-answer {
+  margin-top: 8px; padding: 10px 14px; border-radius: 8px;
+  background: #fef3c7; border: 2px solid #f6d365; color: #92400e;
+  font-size: .88rem; font-weight: 600; animation: fadeInUp .2s;
+}
+
+/* ── Context Translation ── */
+.ctx-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px; margin-bottom: 10px;
+}
+.ctx-card.answered { opacity: .7; }
+.ctx-num { font-size: .66rem; color: var(--dim); margin-bottom: 4px; }
+.ctx-sentence { font-size: .9rem; margin-bottom: 10px; line-height: 1.6; }
+.ctx-blank { color: var(--primary); font-weight: 700; }
+.ctx-q { font-size: .78rem; color: var(--muted); margin-bottom: 8px; }
+.ctx-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ctx-opt {
+  padding: 8px; border-radius: 6px; font-size: .78rem;
+  border: 1px solid var(--border); background: var(--card); color: var(--text);
+  cursor: pointer; text-align: center; transition: all .2s;
+}
+.ctx-opt:hover { border-color: var(--border2); }
+.ctx-opt.correct { background: rgba(74,222,128,.15); border-color: var(--green); color: var(--green); }
+.ctx-opt.wrong { background: rgba(251,113,133,.1); border-color: var(--rose); color: var(--rose); }
+.ctx-opt:disabled { cursor: default; }
+.ctx-feedback { font-size: .76rem; margin-top: 6px; }
+
+/* ── Sentence Builder hint row ── */
+.sb-hint-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.sb-hint-toggle { font-size: .7rem; flex-shrink: 0; }
+.sb-hint { font-size: .78rem; color: var(--muted); font-style: italic; animation: fadeInUp .2s; }
+
+/* ── Fill Story ── */
+.fill-story-text {
+  font-size: .92rem; line-height: 2.1; color: #5a3e1b;
+  background: linear-gradient(135deg, #fef9eb 0%, #fdf2d5 100%);
+  border: 2px solid #f6d365; border-radius: var(--radius);
+  padding: 20px 24px;
+}
+.fill-blank-wrap { display: inline; }
+.fill-input {
+  width: 140px; padding: 4px 8px; border-radius: 6px; font-size: .84rem;
+  border: 2px solid #d4a843; background: #fffef5; color: #1a1a2e;
+  font-family: var(--font); text-align: center; transition: all .2s; font-weight: 600;
+}
+.fill-input::placeholder { color: #c4a265; font-weight: 400; }
+.fill-input:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 3px rgba(37,99,235,.2); background: #fff; }
+.fill-input.fill-correct { background: #dcfce7; border-color: #16a34a; color: #15803d; }
+.fill-input.fill-wrong { background: #fee2e2; border-color: #dc2626; color: #b91c1c; animation: shake .3s; }
+.fill-input.fill-shown { background: #fef3c7; border-color: #d97706; color: #92400e; font-style: italic; }
+.fill-hint { font-size: .68rem; color: #b8860b; margin-left: 2px; font-style: italic; }
+
+/* ── Animations ── */
+@keyframes correctPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-4px)} 40%{transform:translateX(4px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="flag"><span class="f1"></span><span class="f2"></span><span class="f3"></span></div>
+  <h1>Hören<span>Weg</span></h1>
+  <p class="sub">Немецкий A2 — аудирование · транскрипции · AI-промты</p>
+</header>
+
+<div class="wrap">
+  <!-- LIST VIEW -->
+  <div id="list">
+    <div id="lesson-grid"></div>
+  </div>
+
+  <!-- DETAIL VIEW -->
+  <div id="detail">
+    <div class="stitle"><button class="back-btn" onclick="goHome()">← Все уроки</button></div>
+    <div class="detail-head" id="detail-head"></div>
+    <div class="tabs" id="tabs"></div>
+    <div id="tab-panels"></div>
+    <div class="lesson-nav" id="lesson-nav"></div>
+  </div>
+</div>
+
+<footer>
+  Промты для <a href="#">HörenWeg</a>
+  &nbsp;·&nbsp; Источник: Goethe-Institut
+  &nbsp;·&nbsp; 2024–2026
+</footer>
+
+<!-- ═══════════ LESSON DATA ═══════════ -->
+<script>var LESSONS = [];</script>
+<script src="lessons/lesson-01.js"></script>
+
+<!-- ═══════════ APP LOGIC ═══════════ -->
+<script>
+// ─── PROMPT TYPES CONFIG ───
+const PROMPT_TYPES = [
+  { id:'original',    icon:'📖', title:'Транскрипция' },
+  { id:'exercises',   icon:'🏋', title:'Упражнения' },
+  { id:'translation', icon:'📝', title:'Перевод' },
+  { id:'vocabulary',  icon:'📚', title:'Словарь' },
+  { id:'dialogue',    icon:'🎭', title:'Диалог' },
+  { id:'socratic',    icon:'🏛', title:'Сократ' },
+  { id:'synonyms',    icon:'🔄', title:'Синонимы' },
+  { id:'lefebvre',    icon:'🪞', title:'Лефевр' },
+];
+
+// ─── PROMPT TYPES THAT USE TEIL SPLIT ───
+var TEIL_PROMPT_IDS = ['vocabulary', 'dialogue', 'socratic', 'synonyms', 'lefebvre'];
+
+// ─── PLACEHOLDER REPLACEMENT (full lesson) ───
+function fillPrompt(lesson, promptText) {
+  if (!promptText) return '';
+  var fullText = lesson.texts.map(function(t){ return 'Teil ' + t.teil + ' — ' + t.name + ':\n' + t.text; }).join('\n\n');
+  var vocList = lesson.vocabulary.map(function(v){ return '• ' + v.de + ' — ' + v.ru; }).join('\n');
+  return promptText
+    .split('{lessonText}').join(fullText)
+    .split('{level}').join(lesson.level)
+    .split('{title}').join(lesson.title)
+    .split('{vocabularyList}').join(vocList)
+    .split('{grammarFocus}').join(
+      Array.isArray(lesson.grammarFocus) ? lesson.grammarFocus.join(', ') : (lesson.grammarFocus || '')
+    );
+}
+
+// ─── PLACEHOLDER REPLACEMENT (single Teil) ───
+function fillPromptTeil(lesson, teil, promptText) {
+  if (!promptText) return '';
+  var teilTexts = lesson.texts.filter(function(t){ return t.teil === teil; });
+  var fullText = teilTexts.map(function(t){ return t.name + ':\n' + t.text; }).join('\n\n');
+  var vocList = [];
+  var seen = {};
+  teilTexts.forEach(function(t) {
+    t.vocabulary.forEach(function(v) {
+      if (!seen[v.de]) { seen[v.de] = true; vocList.push('• ' + v.de + ' — ' + v.ru); }
+    });
+  });
+  return promptText
+    .split('{lessonText}').join(fullText)
+    .split('{vocabularyList}').join(vocList.join('\n'))
+    .split('{level}').join(lesson.level)
+    .split('{title}').join(lesson.title)
+    .split('{grammarFocus}').join(
+      Array.isArray(lesson.grammarFocus) ? lesson.grammarFocus.join(', ') : (lesson.grammarFocus || '')
+    );
+}
+
+// ─── RENDER PROMPTS BY TEIL (4 accordions) ───
+function renderPromptsByTeil(lesson, promptId) {
+  var teilInfo = [
+    {n:1, label:'Kurze Texte'}, {n:2, label:'Gespräch'},
+    {n:3, label:'Kurze Gespräche'}, {n:4, label:'Interview'}
+  ];
+  var pt = PROMPT_TYPES.find(function(p){ return p.id === promptId; });
+  var html = '<div style="padding:4px 0">';
+  teilInfo.forEach(function(t) {
+    var promptKey = promptId + '_t' + t.n;
+    var prompt = lesson.prompts[promptKey];
+    if (!prompt || !prompt.promptText) return;
+    var filled = fillPromptTeil(lesson, t.n, prompt.promptText);
+    var pid = 'prompt-' + lesson.id + '-' + promptKey;
+    html += '<details class="ex-accordion"><summary>' +
+      pt.icon + ' Teil ' + t.n + ' — ' + pt.title +
+      ' <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + t.label + ')</span>' +
+    '</summary><div class="ex-body">' +
+      '<div class="prompt-card" style="border:none">' +
+        (prompt.instruction ? '<div class="prompt-instr">' + esc(prompt.instruction) + '</div>' : '') +
+        '<div class="prompt-actions">' +
+          '<button class="copy-btn" onclick="copyText(this,\'' + pid + '\')">📋 Скопировать промт</button>' +
+        '</div>' +
+        '<div class="prompt-body" id="' + pid + '">' + esc(filled) + '</div>' +
+      '</div>' +
+    '</div></details>';
+  });
+  html += '</div>';
+  return html;
+}
+
+// ─── RENDER STATS ───
+function renderStats() { /* removed */ }
+
+// ─── RENDER LESSON GRID ───
+function renderGrid() {
+  var html = '';
+  html += '<div class="stitle">Аудирование A2 (' + LESSONS.length + ' экзаменов)</div>';
+  html += '<div class="grid">';
+  LESSONS.forEach(function(l) {
+    html += renderLessonCard(l);
+  });
+  html += '</div>';
+  document.getElementById('lesson-grid').innerHTML = html;
+}
+
+function renderLessonCard(l) {
+  var textsCount = l.texts ? l.texts.length : 0;
+  var topics = ['Hören', 'Goethe A2'];
+  return '<a class="lcard" href="#' + l.id + '">' +
+    '<div class="lcard-head">' +
+      '<div class="lnum">' + String(l.number).padStart(2,'0') + '</div>' +
+      '<div><div class="ltitle">' + esc(l.title) + '</div>' +
+      '<div class="lmeta">' + esc(l.source || 'Goethe-Institut') + ' · ' + l.level + ' · ' + textsCount + ' мини-текстов</div></div>' +
+    '</div>' +
+    '<div class="ltags">' +
+      topics.map(function(t){ return '<span class="ltag">' + t + '</span>'; }).join('') +
+      (l.videoUrl ? '<span class="lcard-yt"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg> YouTube</span>' : '') +
+    '</div>' +
+  '</a>';
+}
+
+// ─── RENDER LESSON DETAIL ───
+function renderDetail(lesson, activeTab) {
+  activeTab = activeTab || PROMPT_TYPES[0].id;
+  var textsCount = lesson.texts ? lesson.texts.length : 0;
+
+  // Header
+  var ytSvg = '<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>';
+  document.getElementById('detail-head').innerHTML =
+    '<div class="detail-num">' + String(lesson.number).padStart(2,'0') + '</div>' +
+    '<div><div class="detail-title">' + esc(lesson.title) + '</div>' +
+    '<div class="detail-meta">' + esc(lesson.source || 'Goethe-Institut') + ' · ' + lesson.level + ' · ' + textsCount + ' мини-текстов</div></div>' +
+    (lesson.videoUrl ? '<a class="yt-link" href="' + lesson.videoUrl + '" target="_blank">' + ytSvg + ' YouTube</a>' : '');
+
+  // Tabs
+  var tabsHtml = '';
+  PROMPT_TYPES.forEach(function(pt) {
+    var cls = pt.id === activeTab ? ' active' : '';
+    tabsHtml += '<button class="tab-btn' + cls + '" data-tab="' + pt.id + '" onclick="switchTab(\'' + lesson.id + '\',\'' + pt.id + '\')">' +
+      '<span class="tab-ico">' + pt.icon + '</span> ' + pt.title + '</button>';
+  });
+  document.getElementById('tabs').innerHTML = tabsHtml;
+
+  // Panels
+  var panelsHtml = '';
+  PROMPT_TYPES.forEach(function(pt) {
+    var cls = pt.id === activeTab ? ' active' : '';
+    panelsHtml += '<div class="tab-panel' + cls + '" data-panel="' + pt.id + '">';
+
+    if (pt.id === 'original') {
+      panelsHtml += renderTextView(lesson);
+    } else if (pt.id === 'exercises') {
+      panelsHtml += renderExercisesView(lesson);
+    } else if (pt.id === 'translation') {
+      panelsHtml += renderTranslationView(lesson);
+    } else if (TEIL_PROMPT_IDS.indexOf(pt.id) !== -1) {
+      // Prompts split by Teil (4 accordions)
+      panelsHtml += renderPromptsByTeil(lesson, pt.id);
+    } else {
+      // Single prompt (e.g. grammar)
+      var prompt = lesson.prompts[pt.id];
+      if (!prompt) {
+        panelsHtml += '<div class="prompt-card"><div class="prompt-instr">Промт для этого типа пока не создан.</div></div>';
+        panelsHtml += '</div>';
+        return;
+      }
+      var filled = fillPrompt(lesson, prompt.promptText);
+      var pid = 'prompt-' + lesson.id + '-' + pt.id;
+      panelsHtml += '<div class="prompt-card">' +
+        '<div class="prompt-instr">' + esc(prompt.instruction || '') + '</div>' +
+        '<div class="prompt-actions">' +
+          '<button class="copy-btn" onclick="copyText(this,\'' + pid + '\')">📋 Скопировать промт</button>' +
+        '</div>' +
+        '<div class="prompt-body" id="' + pid + '">' + esc(filled) + '</div>' +
+      '</div>';
+    }
+
+    panelsHtml += '</div>';
+  });
+  document.getElementById('tab-panels').innerHTML = panelsHtml;
+
+  // Nav prev/next
+  var idx = LESSONS.indexOf(lesson);
+  var prev = idx > 0 ? LESSONS[idx-1] : null;
+  var next = idx < LESSONS.length-1 ? LESSONS[idx+1] : null;
+  document.getElementById('lesson-nav').innerHTML =
+    (prev ? '<a class="nav-btn" href="#' + prev.id + '">← ' + prev.title + '</a>' : '<span></span>') +
+    (next ? '<a class="nav-btn" href="#' + next.id + '">' + next.title + ' →</a>' : '<span></span>');
+}
+
+// ─── RENDER TEXT VIEW (listening version — mini-texts grouped by Teil) ───
+function renderTextView(lesson) {
+  var html = '<div class="text-view">';
+
+  // Teil colors and names
+  var teilColors = {1: '#2563eb', 2: '#16a34a', 3: '#d97706', 4: '#7c3aed'};
+  var teilNames = {1: 'Teil 1 — Kurze Texte', 2: 'Teil 2 — Gespräch', 3: 'Teil 3 — Kurze Gespräche', 4: 'Teil 4 — Interview'};
+
+  var currentTeil = 0;
+  lesson.texts.forEach(function(t) {
+    if (t.teil !== currentTeil) {
+      currentTeil = t.teil;
+      html += '<div style="margin:20px 0 10px;padding:8px 14px;border-radius:8px;background:' + teilColors[t.teil] + '15;border-left:4px solid ' + teilColors[t.teil] + ';font-weight:700;font-size:.9rem;color:' + teilColors[t.teil] + '">' + teilNames[t.teil] + '</div>';
+    }
+    html += '<div style="margin-bottom:16px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)">';
+    html += '<div style="font-weight:700;font-size:.88rem;margin-bottom:4px">' + esc(t.name) + ' <span style="font-weight:400;color:var(--dim);font-size:.74rem">(' + esc(t.type) + ')</span></div>';
+    html += '<p style="font-size:.92rem;line-height:1.7;color:var(--text2)">' + esc(t.text) + '</p>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+
+  // Vocabulary grid
+  var vocab = lesson.vocabulary;
+  html += '<div class="stitle">Словарь (' + vocab.length + ' слов)</div>';
+  html += '<div class="vocab-grid">';
+  vocab.forEach(function(v) {
+    var gcls = '';
+    if (v.gender === 'maskulin') gcls = ' masc';
+    else if (v.gender === 'feminin') gcls = ' fem';
+    else if (v.gender === 'neutrum') gcls = ' neut';
+    html += '<div class="vocab-item"><span class="vocab-de' + gcls + '">' + esc(v.de) + '</span><span class="vocab-ru"> — ' + esc(v.ru) + '</span>' +
+      (v.example ? '<div class="vocab-ex">' + esc(v.example) + '</div>' : '') + '</div>';
+  });
+  html += '</div>';
+
+  // Grammar focus
+  if (lesson.grammarFocus) {
+    html += '<div class="stitle">Грамматический фокус</div>';
+    var gf = Array.isArray(lesson.grammarFocus) ? lesson.grammarFocus : [lesson.grammarFocus];
+    html += '<div style="padding:0 0 12px">';
+    gf.forEach(function(g) {
+      html += '<div style="font-size:.82rem;color:var(--text2);padding:4px 0">• ' + esc(g) + '</div>';
+    });
+    html += '</div>';
+  }
+
+  return html;
+}
+
+// ─── RENDER TRANSLATION VIEW (listening-specific — sentence-by-sentence with literal + literary) ───
+function renderTranslationView(lesson) {
+  var html = '<div style="padding:4px 0">';
+  var teilColors = {1: '#2563eb', 2: '#16a34a', 3: '#d97706', 4: '#7c3aed'};
+  var teilNames = {1: 'Teil 1 — Kurze Texte', 2: 'Teil 2 — Gespräch', 3: 'Teil 3 — Kurze Gespräche', 4: 'Teil 4 — Interview'};
+
+  var currentTeil = 0;
+  lesson.texts.forEach(function(t) {
+    if (t.teil !== currentTeil) {
+      currentTeil = t.teil;
+      html += '<div style="margin:20px 0 10px;padding:8px 14px;border-radius:8px;background:' + teilColors[t.teil] + '15;border-left:4px solid ' + teilColors[t.teil] + ';font-weight:700;font-size:.9rem;color:' + teilColors[t.teil] + '">' + teilNames[t.teil] + '</div>';
+    }
+    html += '<div style="margin-bottom:16px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)">';
+    html += '<div style="font-weight:700;font-size:.88rem;margin-bottom:10px;color:var(--primary)">' + esc(t.name) + '</div>';
+
+    // Table of translations
+    html += '<table style="width:100%;border-collapse:collapse;font-size:.82rem">';
+    html += '<tr style="background:var(--bg2)"><th style="padding:6px 10px;text-align:left;font-size:.7rem;color:var(--dim);text-transform:uppercase">Немецкий</th><th style="padding:6px 10px;text-align:left;font-size:.7rem;color:var(--dim);text-transform:uppercase">Дословный</th><th style="padding:6px 10px;text-align:left;font-size:.7rem;color:var(--dim);text-transform:uppercase">Литературный</th></tr>';
+
+    for (var de in t.sentenceTranslations) {
+      var tr = t.sentenceTranslations[de];
+      html += '<tr style="border-bottom:1px solid var(--border)">';
+      html += '<td style="padding:8px 10px;font-weight:600;color:var(--text)">' + esc(de) + '</td>';
+      html += '<td style="padding:8px 10px;color:var(--muted)">' + esc(tr.literal) + '</td>';
+      html += '<td style="padding:8px 10px;color:var(--text2)">' + esc(tr.literary) + '</td>';
+      html += '</tr>';
+    }
+    html += '</table>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+// ─── CLIPBOARD ───
+function copyText(btn, targetId) {
+  var el = document.getElementById(targetId);
+  if (!el) return;
+  var text = el.textContent;
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){ showCopied(btn); });
+    } else { throw new Error('fallback'); }
+  } catch(e) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showCopied(btn);
+  }
+}
+function showCopied(btn) {
+  btn.textContent = '✅ Скопировано!';
+  btn.classList.add('ok');
+  setTimeout(function(){ btn.textContent = '📋 Скопировать промт'; btn.classList.remove('ok'); }, 2000);
+}
+
+// ─── ROUTING ───
+function parseHash() {
+  var h = location.hash.slice(1);
+  if (!h) return { view: 'list' };
+  var parts = h.split('/');
+  return { view: 'detail', lessonId: parts[0], tabId: parts[1] || PROMPT_TYPES[0].id };
+}
+
+function route() {
+  var r = parseHash();
+  if (r.view === 'detail') {
+    var lesson = LESSONS.find(function(l){ return l.id === r.lessonId; });
+    if (lesson) {
+      document.getElementById('list').style.display = 'none';
+      document.getElementById('detail').style.display = 'block';
+      renderDetail(lesson, r.tabId);
+      attachExerciseListeners(lesson);
+      window.scrollTo(0, 0);
+      return;
+    }
+  }
+  document.getElementById('list').style.display = 'block';
+  document.getElementById('detail').style.display = 'none';
+}
+
+function goHome() { location.hash = ''; }
+
+function switchTab(lessonId, tabId) {
+  location.hash = lessonId + '/' + tabId;
+}
+
+// ─── UTILS ───
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ═══════════════════════════════════════
+// EXERCISES
+// ═══════════════════════════════════════
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+// ─── EXERCISES VIEW (6 accordions) ───
+function renderExercisesView(lesson) {
+  var teilInfo = [
+    {n:1, label:'Kurze Texte'}, {n:2, label:'Gespräch'},
+    {n:3, label:'Kurze Gespräche'}, {n:4, label:'Interview'}
+  ];
+  var html = '<div style="padding:4px 0">';
+
+  // Викторина по словам (4 Teil)
+  teilInfo.forEach(function(t) {
+    html += '<details class="ex-accordion" id="ex-vquiz-t' + t.n + '"><summary>🎯 Teil ' + t.n + ' — Викторина по словам <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + t.label + ')</span></summary>' +
+      '<div class="ex-body" id="ex-vquiz-t' + t.n + '-body"></div></details>';
+  });
+
+  // Сопоставление слов (4 Teil)
+  teilInfo.forEach(function(t) {
+    html += '<details class="ex-accordion" id="ex-wmatch-t' + t.n + '"><summary>🧩 Teil ' + t.n + ' — Сопоставление слов <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + t.label + ')</span></summary>' +
+      '<div class="ex-body" id="ex-wmatch-t' + t.n + '-body"></div></details>';
+  });
+
+  // Артикли и род (4 Teil)
+  teilInfo.forEach(function(t) {
+    html += '<details class="ex-accordion" id="ex-article-t' + t.n + '"><summary>🎨 Teil ' + t.n + ' — Артикли и род <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + t.label + ')</span></summary>' +
+      '<div class="ex-body" id="ex-article-t' + t.n + '-body"></div></details>';
+  });
+
+  // Конструктор предложений (4 Teil)
+  teilInfo.forEach(function(t) {
+    html += '<details class="ex-accordion" id="ex-sbuild-t' + t.n + '"><summary>🧱 Teil ' + t.n + ' — Конструктор предложений <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + t.label + ')</span></summary>' +
+      '<div class="ex-body" id="ex-sbuild-t' + t.n + '-body"></div></details>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// After rendering, attach toggle listeners
+var _origRoute = null;
+function attachExerciseListeners(lesson) {
+  window._vqMode = null;
+  var ids = [
+    // Викторина
+    ['ex-vquiz-t1', function(){ initVocabQuizTeil(lesson, 1, document.getElementById('ex-vquiz-t1-body'), 'ex-vquiz-t1'); }],
+    ['ex-vquiz-t2', function(){ initVocabQuizTeil(lesson, 2, document.getElementById('ex-vquiz-t2-body'), 'ex-vquiz-t2'); }],
+    ['ex-vquiz-t3', function(){ initVocabQuizTeil(lesson, 3, document.getElementById('ex-vquiz-t3-body'), 'ex-vquiz-t3'); }],
+    ['ex-vquiz-t4', function(){ initVocabQuizTeil(lesson, 4, document.getElementById('ex-vquiz-t4-body'), 'ex-vquiz-t4'); }],
+    // Сопоставление
+    ['ex-wmatch-t1', function(){ initWordMatchingTeil(lesson, 1, document.getElementById('ex-wmatch-t1-body')); }],
+    ['ex-wmatch-t2', function(){ initWordMatchingTeil(lesson, 2, document.getElementById('ex-wmatch-t2-body')); }],
+    ['ex-wmatch-t3', function(){ initWordMatchingTeil(lesson, 3, document.getElementById('ex-wmatch-t3-body')); }],
+    ['ex-wmatch-t4', function(){ initWordMatchingTeil(lesson, 4, document.getElementById('ex-wmatch-t4-body')); }],
+    // Артикли
+    ['ex-article-t1', function(){ initArticleQuizTeil(lesson, 1, document.getElementById('ex-article-t1-body')); }],
+    ['ex-article-t2', function(){ initArticleQuizTeil(lesson, 2, document.getElementById('ex-article-t2-body')); }],
+    ['ex-article-t3', function(){ initArticleQuizTeil(lesson, 3, document.getElementById('ex-article-t3-body')); }],
+    ['ex-article-t4', function(){ initArticleQuizTeil(lesson, 4, document.getElementById('ex-article-t4-body')); }],
+    // Конструктор
+    ['ex-sbuild-t1', function(){ initSentenceBuilderTeil(lesson, 1, document.getElementById('ex-sbuild-t1-body')); }],
+    ['ex-sbuild-t2', function(){ initSentenceBuilderTeil(lesson, 2, document.getElementById('ex-sbuild-t2-body')); }],
+    ['ex-sbuild-t3', function(){ initSentenceBuilderTeil(lesson, 3, document.getElementById('ex-sbuild-t3-body')); }],
+    ['ex-sbuild-t4', function(){ initSentenceBuilderTeil(lesson, 4, document.getElementById('ex-sbuild-t4-body')); }],
+  ];
+  ids.forEach(function(pair) {
+    var el = document.getElementById(pair[0]);
+    if (el && !el._exInit) {
+      el._exInit = true;
+      el.addEventListener('toggle', function() {
+        if (el.open && !el._exLoaded) {
+          el._exLoaded = true;
+          pair[1]();
+        }
+      });
+    }
+  });
+}
+
+// ─── HELPER: get vocabulary for a specific Teil ───
+function getVocabByTeil(lesson, teil) {
+  var all = [], seen = {};
+  lesson.texts.forEach(function(t) {
+    if (t.teil !== teil) return;
+    t.vocabulary.forEach(function(v) {
+      if (!seen[v.de]) {
+        seen[v.de] = true;
+        all.push({ de: v.de, ru: v.ru, gender: v.gender || null, example: v.example || v.collocation || '' });
+      }
+    });
+  });
+  return all.slice(0, 24);
+}
+
+// ─── 1. VOCAB QUIZ PER TEIL ───
+function initVocabQuizTeil(lesson, teil, container, quizId) {
+  var teilNames = {1: 'Teil 1', 2: 'Teil 2', 3: 'Teil 3', 4: 'Teil 4'};
+  var vocab = shuffle(getVocabByTeil(lesson, teil));
+  if (!vocab.length) { container.innerHTML = '<div style="color:var(--dim)">Нет слов для ' + teilNames[teil] + '.</div>'; return; }
+  var allVocab = lesson.vocabulary; // full vocab for distractors
+  var idx = 0, correct = 0, mode = 'de2ru';
+
+  function render() {
+    if (idx >= vocab.length) {
+      var pct = Math.round(correct / vocab.length * 100);
+      container.innerHTML = '<div class="vq-result"><div class="score">' + correct + '/' + vocab.length + '</div>' +
+        '<div style="color:var(--muted);margin-top:4px">' + pct + '% правильно</div>' +
+        '<button class="sb-btn" style="margin-top:12px" onclick="var el=document.getElementById(\'' + quizId + '\');el._exLoaded=false;el.open=false;setTimeout(function(){el.open=true;el._exLoaded=true;initVocabQuizTeil(LESSONS.find(function(l){return l.id===parseHash().lessonId}),' + teil + ',document.getElementById(\'' + quizId + '-body\'),\'' + quizId + '\')},50)">🔄 Заново</button></div>';
+      return;
+    }
+    var w = vocab[idx];
+    var question = mode === 'de2ru' ? w.de : w.ru;
+    var answer = mode === 'de2ru' ? w.ru : w.de;
+    // Distractors from ALL vocabulary (more variety)
+    var pool = allVocab.filter(function(v){ return v.de !== w.de && v.ru !== w.ru; });
+    pool = shuffle(pool).slice(0, 3);
+    var distractors = pool.map(function(v){ return mode === 'de2ru' ? v.ru : v.de; });
+    var opts = shuffle([answer].concat(distractors));
+    var optsId = 'vq-opts-' + quizId;
+
+    container.innerHTML =
+      '<div class="ex-mode">' +
+        '<button class="ex-mode-btn' + (mode==='de2ru'?' active':'') + '" onclick="window._vqMode=\'de2ru\';initVocabQuizTeil(LESSONS.find(function(l){return l.id===parseHash().lessonId}),' + teil + ',document.getElementById(\'' + quizId + '-body\'),\'' + quizId + '\')">DE → RU</button>' +
+        '<button class="ex-mode-btn' + (mode==='ru2de'?' active':'') + '" onclick="window._vqMode=\'ru2de\';initVocabQuizTeil(LESSONS.find(function(l){return l.id===parseHash().lessonId}),' + teil + ',document.getElementById(\'' + quizId + '-body\'),\'' + quizId + '\')">RU → DE</button>' +
+      '</div>' +
+      '<div class="ex-progress"><div class="ex-progress-bar"><div class="ex-progress-fill" style="width:' + (idx/vocab.length*100) + '%"></div></div>' +
+        '<div class="ex-progress-text">Вопрос ' + (idx+1) + ' из ' + vocab.length + '</div></div>' +
+      '<div class="vq-card"><div class="vq-word">' + esc(question) + '</div>' +
+        (w.example ? '<div class="vq-hint">' + esc(w.example) + '</div>' : '') +
+        '<div class="vq-options" id="' + optsId + '">' +
+          opts.map(function(o, i){ return '<button class="vq-opt" data-i="' + i + '" data-val="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') +
+        '</div></div>';
+
+    document.querySelectorAll('#' + optsId + ' .vq-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var btns = document.querySelectorAll('#' + optsId + ' .vq-opt');
+        btns.forEach(function(b){ b.disabled = true; });
+        if (btn.dataset.val === answer) {
+          btn.classList.add('correct');
+          correct++;
+          setTimeout(function(){ idx++; render(); }, 800);
+        } else {
+          btn.classList.add('wrong');
+          btns.forEach(function(b){ if (b.dataset.val === answer) b.classList.add('correct'); });
+          setTimeout(function(){ idx++; render(); }, 1500);
+        }
+      });
+    });
+  }
+
+  if (window._vqMode) { mode = window._vqMode; }
+  render();
+}
+
+// ─── 1b. VOCAB QUIZ (legacy, full lesson) ───
+function initVocabQuiz(lesson, container) {
+  var vocab = shuffle(lesson.vocabulary.slice());
+  var idx = 0, correct = 0, mode = 'de2ru';
+
+  function render() {
+    if (idx >= vocab.length) {
+      var pct = Math.round(correct / vocab.length * 100);
+      container.innerHTML = '<div class="vq-result"><div class="score">' + correct + '/' + vocab.length + '</div>' +
+        '<div style="color:var(--muted);margin-top:4px">' + pct + '% правильно</div>' +
+        '<button class="sb-btn" style="margin-top:12px" onclick="this.closest(\'.ex-accordion\')._exLoaded=false;this.closest(\'.ex-accordion\').open=false;setTimeout(function(){document.getElementById(\'ex-vquiz\').open=true;document.getElementById(\'ex-vquiz\')._exLoaded=true;initVocabQuiz(LESSONS.find(function(l){return l.id===parseHash().lessonId}),document.getElementById(\'ex-vquiz-body\'))},50)">🔄 Заново</button></div>';
+      return;
+    }
+    var w = vocab[idx];
+    var question = mode === 'de2ru' ? w.de : w.ru;
+    var answer = mode === 'de2ru' ? w.ru : w.de;
+    var distractors = [];
+    var pool = lesson.vocabulary.filter(function(v){ return v !== w; });
+    pool = shuffle(pool).slice(0, 3);
+    distractors = pool.map(function(v){ return mode === 'de2ru' ? v.ru : v.de; });
+    var opts = shuffle([answer].concat(distractors));
+
+    container.innerHTML =
+      '<div class="ex-mode">' +
+        '<button class="ex-mode-btn' + (mode==='de2ru'?' active':'') + '" onclick="document.getElementById(\'ex-vquiz\')._exLoaded=false;document.getElementById(\'ex-vquiz\')._exLoaded=true;window._vqMode=\'de2ru\';initVocabQuiz(LESSONS.find(function(l){return l.id===parseHash().lessonId}),document.getElementById(\'ex-vquiz-body\'))">DE → RU</button>' +
+        '<button class="ex-mode-btn' + (mode==='ru2de'?' active':'') + '" onclick="document.getElementById(\'ex-vquiz\')._exLoaded=false;document.getElementById(\'ex-vquiz\')._exLoaded=true;window._vqMode=\'ru2de\';initVocabQuiz(LESSONS.find(function(l){return l.id===parseHash().lessonId}),document.getElementById(\'ex-vquiz-body\'))">RU → DE</button>' +
+      '</div>' +
+      '<div class="ex-progress"><div class="ex-progress-bar"><div class="ex-progress-fill" style="width:' + (idx/vocab.length*100) + '%"></div></div>' +
+        '<div class="ex-progress-text">Вопрос ' + (idx+1) + ' из ' + vocab.length + '</div></div>' +
+      '<div class="vq-card"><div class="vq-word">' + esc(question) + '</div>' +
+        (w.example ? '<div class="vq-hint">' + esc(w.example) + '</div>' : '') +
+        '<div class="vq-options" id="vq-opts">' +
+          opts.map(function(o, i){ return '<button class="vq-opt" data-i="' + i + '" data-val="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') +
+        '</div></div>';
+
+    document.querySelectorAll('#vq-opts .vq-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var btns = document.querySelectorAll('#vq-opts .vq-opt');
+        btns.forEach(function(b){ b.disabled = true; });
+        if (btn.dataset.val === answer) {
+          btn.classList.add('correct');
+          correct++;
+          setTimeout(function(){ idx++; render(); }, 800);
+        } else {
+          btn.classList.add('wrong');
+          btns.forEach(function(b){ if (b.dataset.val === answer) b.classList.add('correct'); });
+          setTimeout(function(){ idx++; render(); }, 1500);
+        }
+      });
+    });
+  }
+
+  if (window._vqMode) { mode = window._vqMode; }
+  render();
+}
+
+// ─── 2. WORD MATCHING ───
+function initWordMatching(lesson, container) {
+  var words = shuffle(lesson.vocabulary.slice()).slice(0, 10);
+  var deWords = shuffle(words.map(function(w,i){ return {text:w.de, idx:i}; }));
+  var ruWords = shuffle(words.map(function(w,i){ return {text:w.ru, idx:i}; }));
+  var matched = 0, selDe = null;
+
+  container.innerHTML =
+    '<div class="ex-progress"><div class="ex-progress-bar"><div class="ex-progress-fill" id="wm-fill" style="width:0%"></div></div>' +
+      '<div class="ex-progress-text" id="wm-text">0 из ' + words.length + '</div></div>' +
+    '<div class="wmatch-grid">' +
+      '<div><div class="wmatch-col-title">Немецкий</div><div id="wm-de">' +
+        deWords.map(function(w){ return '<div class="wmatch-word" data-idx="' + w.idx + '" data-side="de">' + esc(w.text) + '</div>'; }).join('') +
+      '</div></div>' +
+      '<div><div class="wmatch-col-title">Русский</div><div id="wm-ru">' +
+        ruWords.map(function(w){ return '<div class="wmatch-word" data-idx="' + w.idx + '" data-side="ru">' + esc(w.text) + '</div>'; }).join('') +
+      '</div></div>' +
+    '</div>';
+
+  container.querySelectorAll('.wmatch-word').forEach(function(el) {
+    el.addEventListener('click', function() {
+      if (el.classList.contains('matched')) return;
+      if (el.dataset.side === 'de') {
+        container.querySelectorAll('.wmatch-word[data-side="de"]').forEach(function(e){ e.classList.remove('selected'); });
+        el.classList.add('selected');
+        selDe = el.dataset.idx;
+      } else if (el.dataset.side === 'ru' && selDe !== null) {
+        if (el.dataset.idx === selDe) {
+          // correct match
+          el.classList.add('matched');
+          container.querySelector('.wmatch-word[data-side="de"][data-idx="' + selDe + '"]').classList.add('matched');
+          container.querySelector('.wmatch-word[data-side="de"][data-idx="' + selDe + '"]').classList.remove('selected');
+          matched++;
+          document.getElementById('wm-fill').style.width = (matched/words.length*100) + '%';
+          document.getElementById('wm-text').textContent = matched + ' из ' + words.length;
+          selDe = null;
+        } else {
+          el.classList.add('wrong');
+          setTimeout(function(){ el.classList.remove('wrong'); }, 500);
+        }
+      }
+    });
+  });
+}
+
+// ─── 2b. WORD MATCHING PER TEIL ───
+function initWordMatchingTeil(lesson, teil, container) {
+  var vocab = getVocabByTeil(lesson, teil);
+  var words = shuffle(vocab.slice()).slice(0, 10);
+  if (!words.length) { container.innerHTML = '<div style="color:var(--dim)">Нет слов для этого Teil.</div>'; return; }
+  var deWords = shuffle(words.map(function(w,i){ return {text:w.de, idx:i}; }));
+  var ruWords = shuffle(words.map(function(w,i){ return {text:w.ru, idx:i}; }));
+  var matched = 0, selDe = null;
+
+  container.innerHTML =
+    '<div class="ex-progress"><div class="ex-progress-bar"><div class="ex-progress-fill" id="wm-fill-t' + teil + '" style="width:0%"></div></div>' +
+      '<div class="ex-progress-text" id="wm-text-t' + teil + '">0 из ' + words.length + '</div></div>' +
+    '<div class="wmatch-grid">' +
+      '<div><div class="wmatch-col-title">Немецкий</div><div id="wm-de-t' + teil + '">' +
+        deWords.map(function(w){ return '<div class="wmatch-word" data-idx="' + w.idx + '" data-side="de">' + esc(w.text) + '</div>'; }).join('') +
+      '</div></div>' +
+      '<div><div class="wmatch-col-title">Русский</div><div id="wm-ru-t' + teil + '">' +
+        ruWords.map(function(w){ return '<div class="wmatch-word" data-idx="' + w.idx + '" data-side="ru">' + esc(w.text) + '</div>'; }).join('') +
+      '</div></div>' +
+    '</div>';
+
+  container.querySelectorAll('.wmatch-word').forEach(function(el) {
+    el.addEventListener('click', function() {
+      if (el.classList.contains('matched')) return;
+      if (el.dataset.side === 'de') {
+        container.querySelectorAll('.wmatch-word[data-side="de"]').forEach(function(e){ e.classList.remove('selected'); });
+        el.classList.add('selected');
+        selDe = el.dataset.idx;
+      } else if (el.dataset.side === 'ru' && selDe !== null) {
+        if (el.dataset.idx === selDe) {
+          el.classList.add('matched');
+          container.querySelector('.wmatch-word[data-side="de"][data-idx="' + selDe + '"]').classList.add('matched');
+          container.querySelector('.wmatch-word[data-side="de"][data-idx="' + selDe + '"]').classList.remove('selected');
+          matched++;
+          document.getElementById('wm-fill-t' + teil).style.width = (matched/words.length*100) + '%';
+          document.getElementById('wm-text-t' + teil).textContent = matched + ' из ' + words.length;
+          selDe = null;
+        } else {
+          el.classList.add('wrong');
+          setTimeout(function(){ el.classList.remove('wrong'); }, 500);
+        }
+      }
+    });
+  });
+}
+
+// ─── 3. ARTICLE QUIZ ───
+function initArticleQuiz(lesson, container) {
+  var nouns = lesson.vocabulary.filter(function(v){ return v.gender; });
+  if (!nouns.length) { container.innerHTML = '<div style="color:var(--dim)">Нет существительных в словаре.</div>'; return; }
+  var solved = 0;
+
+  container.innerHTML =
+    '<div class="aq-legend">' +
+      '<div class="aq-legend-item"><span style="color:var(--gram-masc)">♂</span> der — мужской</div>' +
+      '<div class="aq-legend-item"><span style="color:var(--gram-fem)">♀</span> die — женский</div>' +
+      '<div class="aq-legend-item"><span style="color:var(--gram-neut)">⚪</span> das — средний</div>' +
+    '</div>' +
+    '<div class="ex-progress"><div class="ex-progress-bar"><div class="ex-progress-fill" id="aq-fill" style="width:0%"></div></div>' +
+      '<div class="ex-progress-text" id="aq-text">0/' + nouns.length + ' правильных</div></div>' +
+    '<div class="aq-grid">' +
+      nouns.map(function(n, i) {
+        var parts = n.de.split(/\s+/);
+        var article = parts[0].toLowerCase();
+        var noun = parts.slice(1).join(' ');
+        return '<div class="aq-item" id="aq-' + i + '" data-art="' + article + '">' +
+          '<div class="aq-noun">' + esc(noun) + '</div>' +
+          '<div class="aq-trans">' + esc(n.ru) + '</div>' +
+          '<div class="aq-btns">' +
+            '<button class="aq-btn der" data-a="der">der</button>' +
+            '<button class="aq-btn die" data-a="die">die</button>' +
+            '<button class="aq-btn das" data-a="das">das</button>' +
+          '</div></div>';
+      }).join('') +
+    '</div>';
+
+  container.querySelectorAll('.aq-item').forEach(function(item) {
+    var correct = item.dataset.art;
+    var answered = false;
+    item.querySelectorAll('.aq-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (answered) return;
+        if (btn.dataset.a === correct) {
+          answered = true;
+          btn.classList.add('correct');
+          item.classList.add('solved');
+          item.querySelectorAll('.aq-btn').forEach(function(b){ b.disabled = true; });
+          solved++;
+          document.getElementById('aq-fill').style.width = (solved/nouns.length*100) + '%';
+          document.getElementById('aq-text').textContent = solved + '/' + nouns.length + ' правильных';
+        } else {
+          btn.classList.add('wrong');
+          setTimeout(function(){ btn.classList.remove('wrong'); }, 500);
+        }
+      });
+    });
+  });
+}
+
+// ─── 3b. ARTICLE QUIZ PER TEIL ───
+function initArticleQuizTeil(lesson, teil, container) {
+  var vocab = getVocabByTeil(lesson, teil);
+  var nouns = vocab.filter(function(v){ return v.gender; }).slice(0, 12);
+  if (!nouns.length) { container.innerHTML = '<div style="color:var(--dim)">Нет существительных для этого Teil.</div>'; return; }
+  var solved = 0;
+  var aqId = 'aq-t' + teil;
+
+  container.innerHTML =
+    '<div class="aq-legend">' +
+      '<div class="aq-legend-item"><span style="color:var(--gram-masc)">♂</span> der — мужской</div>' +
+      '<div class="aq-legend-item"><span style="color:var(--gram-fem)">♀</span> die — женский</div>' +
+      '<div class="aq-legend-item"><span style="color:var(--gram-neut)">⚪</span> das — средний</div>' +
+    '</div>' +
+    '<div class="ex-progress"><div class="ex-progress-bar"><div class="ex-progress-fill" id="' + aqId + '-fill" style="width:0%"></div></div>' +
+      '<div class="ex-progress-text" id="' + aqId + '-text">0/' + nouns.length + ' правильных</div></div>' +
+    '<div class="aq-grid">' +
+      nouns.map(function(n, i) {
+        var parts = n.de.split(/\s+/);
+        var article = parts[0].toLowerCase();
+        var noun = parts.length > 1 ? parts.slice(1).join(' ') : parts[0];
+        if (article !== 'der' && article !== 'die' && article !== 'das') {
+          article = n.gender === 'maskulin' ? 'der' : n.gender === 'feminin' ? 'die' : 'das';
+          noun = n.de;
+        }
+        return '<div class="aq-item" id="' + aqId + '-' + i + '" data-art="' + article + '">' +
+          '<div class="aq-noun">' + esc(noun) + '</div>' +
+          '<div class="aq-trans">' + esc(n.ru) + '</div>' +
+          '<div class="aq-btns">' +
+            '<button class="aq-btn der" data-a="der">der</button>' +
+            '<button class="aq-btn die" data-a="die">die</button>' +
+            '<button class="aq-btn das" data-a="das">das</button>' +
+          '</div></div>';
+      }).join('') +
+    '</div>';
+
+  container.querySelectorAll('.aq-item').forEach(function(item) {
+    var correct = item.dataset.art;
+    var answered = false;
+    item.querySelectorAll('.aq-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (answered) return;
+        if (btn.dataset.a === correct) {
+          answered = true;
+          btn.classList.add('correct');
+          item.classList.add('solved');
+          item.querySelectorAll('.aq-btn').forEach(function(b){ b.disabled = true; });
+          solved++;
+          document.getElementById(aqId + '-fill').style.width = (solved/nouns.length*100) + '%';
+          document.getElementById(aqId + '-text').textContent = solved + '/' + nouns.length + ' правильных';
+        } else {
+          btn.classList.add('wrong');
+          setTimeout(function(){ btn.classList.remove('wrong'); }, 500);
+        }
+      });
+    });
+  });
+}
+
+// ─── 4. SENTENCE BUILDER (adapted for texts array) ───
+function initSentenceBuilder(lesson, container) {
+  var fullText = lesson.texts.map(function(t){ return t.text; }).join(' ');
+  var sentences = fullText.replace(/\n+/g, ' ').split(/(?<=[.!?])\s+/).filter(function(s){
+    var wc = s.trim().split(/\s+/).length;
+    return wc >= 4 && wc <= 14;
+  });
+  sentences = shuffle(sentences).slice(0, 12);
+  if (!sentences.length) { container.innerHTML = '<div style="color:var(--dim)">Нет подходящих предложений.</div>'; return; }
+
+  // Translation map from lesson data
+  var trMap = (lesson.sentenceTranslations || {});
+
+  container.innerHTML = sentences.map(function(s, i) {
+    var words = s.trim().split(/\s+/);
+    var shuffled = shuffle(words.slice());
+    var hint = trMap[s.trim()] || '';
+    return '<div class="sb-card" id="sb-card-' + i + '">' +
+      '<div class="sb-num">Предложение ' + (i+1) + ' из ' + sentences.length + '</div>' +
+      '<div class="sb-hint-row">' +
+        '<button class="sb-btn sb-hint-toggle" onclick="sbToggleHint(' + i + ')">' +
+          '💡 Подсказка' +
+        '</button>' +
+        '<div class="sb-hint" id="sb-hint-' + i + '" style="display:none">' +
+          (hint ? esc(hint) : '<span style="color:var(--dim)">Составьте предложение из фрагментов</span>') +
+        '</div>' +
+      '</div>' +
+      '<div class="sb-result" id="sb-res-' + i + '"></div>' +
+      '<div class="sb-pool" id="sb-pool-' + i + '">' +
+        shuffled.map(function(w, j){ return '<span class="sb-frag" data-w="' + esc(w) + '" data-si="' + i + '">' + esc(w) + '</span>'; }).join('') +
+      '</div>' +
+      '<div class="sb-actions">' +
+        '<button class="sb-btn" onclick="sbUndo(' + i + ')">← Убрать</button>' +
+        '<button class="sb-btn" onclick="sbCheck(' + i + ',\'' + esc(words.join(' ')).replace(/'/g, "\\'") + '\')">✓ Проверить</button>' +
+        '<button class="sb-btn" onclick="sbReset(' + i + ')">↺ Сброс</button>' +
+        '<button class="sb-btn" id="sb-ans-btn-' + i + '" onclick="sbToggleAnswer(' + i + ')">👁 Ответ</button>' +
+      '</div>' +
+      '<div class="sb-feedback" id="sb-fb-' + i + '"></div>' +
+      '<div class="sb-answer" id="sb-ans-' + i + '" style="display:none">' + esc(words.join(' ')) + '</div>' +
+    '</div>';
+  }).join('');
+
+  container.querySelectorAll('.sb-frag').forEach(function(frag) {
+    frag.addEventListener('click', function() {
+      if (frag.classList.contains('used')) return;
+      var si = frag.dataset.si;
+      var res = document.getElementById('sb-res-' + si);
+      frag.classList.add('used');
+      var span = document.createElement('span');
+      span.className = 'sb-result-word';
+      span.textContent = frag.dataset.w;
+      span.dataset.fragId = Array.from(frag.parentNode.children).indexOf(frag);
+      span.dataset.si = si;
+      span.addEventListener('click', function() {
+        var pool = document.getElementById('sb-pool-' + si);
+        pool.children[parseInt(span.dataset.fragId)].classList.remove('used');
+        span.remove();
+      });
+      res.appendChild(span);
+    });
+  });
+}
+
+window.sbToggleHint = function(i) {
+  var el = document.getElementById('sb-hint-' + i);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+};
+
+window.sbToggleAnswer = function(i) {
+  var el = document.getElementById('sb-ans-' + i);
+  var btn = document.getElementById('sb-ans-btn-' + i);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    btn.textContent = '🙈 Скрыть';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '👁 Ответ';
+  }
+};
+
+window.sbUndo = function(i) {
+  var res = document.getElementById('sb-res-' + i);
+  var last = res.lastElementChild;
+  if (last) {
+    var pool = document.getElementById('sb-pool-' + i);
+    pool.children[parseInt(last.dataset.fragId)].classList.remove('used');
+    last.remove();
+  }
+};
+
+window.sbCheck = function(i, correct) {
+  var res = document.getElementById('sb-res-' + i);
+  var fb = document.getElementById('sb-fb-' + i);
+  var built = Array.from(res.children).map(function(c){ return c.textContent; }).join(' ');
+  if (built === correct) {
+    fb.className = 'sb-feedback ok';
+    fb.textContent = '✅ Richtig!';
+    document.getElementById('sb-card-' + i).classList.add('done');
+  } else {
+    fb.className = 'sb-feedback err';
+    fb.textContent = '❌ Попробуйте ещё раз';
+  }
+};
+
+window.sbReset = function(i) {
+  var res = document.getElementById('sb-res-' + i);
+  var pool = document.getElementById('sb-pool-' + i);
+  var fb = document.getElementById('sb-fb-' + i);
+  res.innerHTML = '';
+  pool.querySelectorAll('.sb-frag').forEach(function(f){ f.classList.remove('used'); });
+  fb.textContent = '';
+  document.getElementById('sb-card-' + i).classList.remove('done');
+};
+
+// ─── 4b. SENTENCE BUILDER PER TEIL ───
+function initSentenceBuilderTeil(lesson, teil, container) {
+  var teilTexts = lesson.texts.filter(function(t){ return t.teil === teil; });
+  var allSentences = [];
+  teilTexts.forEach(function(t) {
+    var sents = t.text.replace(/\n+/g, ' ').split(/(?<=[.!?])\s+/).filter(function(s){
+      var wc = s.trim().split(/\s+/).length;
+      return wc >= 4 && wc <= 12;
+    });
+    allSentences = allSentences.concat(sents);
+  });
+  var sentences = shuffle(allSentences).slice(0, 4);
+  if (!sentences.length) { container.innerHTML = '<div style="color:var(--dim)">Нет подходящих предложений для этого Teil.</div>'; return; }
+
+  var trMap = {};
+  teilTexts.forEach(function(t) {
+    var st = t.sentenceTranslations || {};
+    for (var de in st) {
+      trMap[de] = typeof st[de] === 'string' ? st[de] : (st[de].literary || '');
+    }
+  });
+
+  var sbPrefix = 'sb-t' + teil;
+  container.innerHTML = sentences.map(function(s, i) {
+    var words = s.trim().split(/\s+/);
+    var shuffled = shuffle(words.slice());
+    var hint = trMap[s.trim()] || '';
+    var cardId = sbPrefix + '-card-' + i;
+    return '<div class="sb-card" id="' + cardId + '">' +
+      '<div class="sb-num">Предложение ' + (i+1) + ' из ' + sentences.length + '</div>' +
+      '<div class="sb-hint-row">' +
+        '<button class="sb-btn sb-hint-toggle" onclick="sbToggleHint(\'' + sbPrefix + '-hint-' + i + '\')">' +
+          '💡 Подсказка' +
+        '</button>' +
+        '<div class="sb-hint" id="' + sbPrefix + '-hint-' + i + '" style="display:none">' +
+          (hint ? esc(hint) : '<span style="color:var(--dim)">Составьте предложение из фрагментов</span>') +
+        '</div>' +
+      '</div>' +
+      '<div class="sb-result" id="' + sbPrefix + '-res-' + i + '"></div>' +
+      '<div class="sb-pool" id="' + sbPrefix + '-pool-' + i + '">' +
+        shuffled.map(function(w, j){ return '<span class="sb-frag" data-w="' + esc(w) + '" data-si="' + sbPrefix + '-' + i + '">' + esc(w) + '</span>'; }).join('') +
+      '</div>' +
+      '<div class="sb-actions">' +
+        '<button class="sb-btn" onclick="sbUndoTeil(\'' + sbPrefix + '-res-' + i + '\',\'' + sbPrefix + '-pool-' + i + '\')">← Убрать</button>' +
+        '<button class="sb-btn" onclick="sbCheckTeil(\'' + sbPrefix + '-res-' + i + '\',\'' + sbPrefix + '-fb-' + i + '\',\'' + cardId + '\',\'' + esc(words.join(' ')).replace(/'/g, "\\'") + '\')">✓ Проверить</button>' +
+        '<button class="sb-btn" onclick="sbResetTeil(\'' + sbPrefix + '-res-' + i + '\',\'' + sbPrefix + '-pool-' + i + '\',\'' + sbPrefix + '-fb-' + i + '\',\'' + cardId + '\')">↺ Сброс</button>' +
+        '<button class="sb-btn" id="' + sbPrefix + '-ans-btn-' + i + '" onclick="sbToggleAnswerTeil(\'' + sbPrefix + '-ans-' + i + '\',\'' + sbPrefix + '-ans-btn-' + i + '\')">👁 Ответ</button>' +
+      '</div>' +
+      '<div class="sb-feedback" id="' + sbPrefix + '-fb-' + i + '"></div>' +
+      '<div class="sb-answer" id="' + sbPrefix + '-ans-' + i + '" style="display:none">' + esc(words.join(' ')) + '</div>' +
+    '</div>';
+  }).join('');
+
+  container.querySelectorAll('.sb-frag').forEach(function(frag) {
+    frag.addEventListener('click', function() {
+      if (frag.classList.contains('used')) return;
+      var si = frag.dataset.si;
+      var parts = si.split('-');
+      var idx = parts[parts.length - 1];
+      var prefix = parts.slice(0, parts.length - 1).join('-');
+      var res = document.getElementById(prefix + '-res-' + idx);
+      frag.classList.add('used');
+      var span = document.createElement('span');
+      span.className = 'sb-result-word';
+      span.textContent = frag.dataset.w;
+      span.dataset.fragId = Array.from(frag.parentNode.children).indexOf(frag);
+      span.dataset.poolId = prefix + '-pool-' + idx;
+      span.addEventListener('click', function() {
+        var pool = document.getElementById(span.dataset.poolId);
+        pool.children[parseInt(span.dataset.fragId)].classList.remove('used');
+        span.remove();
+      });
+      res.appendChild(span);
+    });
+  });
+}
+
+window.sbToggleHintOrig = window.sbToggleHint;
+window.sbToggleHint = function(idOrNum) {
+  if (typeof idOrNum === 'number') {
+    var el = document.getElementById('sb-hint-' + idOrNum);
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  } else {
+    var el = document.getElementById(idOrNum);
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+};
+
+window.sbUndoTeil = function(resId, poolId) {
+  var res = document.getElementById(resId);
+  var last = res ? res.lastElementChild : null;
+  if (last) {
+    var pool = document.getElementById(poolId);
+    pool.children[parseInt(last.dataset.fragId)].classList.remove('used');
+    last.remove();
+  }
+};
+
+window.sbCheckTeil = function(resId, fbId, cardId, correct) {
+  var res = document.getElementById(resId);
+  var fb = document.getElementById(fbId);
+  var built = Array.from(res.children).map(function(c){ return c.textContent; }).join(' ');
+  if (built === correct) {
+    fb.className = 'sb-feedback ok';
+    fb.textContent = '✅ Richtig!';
+    document.getElementById(cardId).classList.add('done');
+  } else {
+    fb.className = 'sb-feedback err';
+    fb.textContent = '❌ Попробуйте ещё раз';
+  }
+};
+
+window.sbResetTeil = function(resId, poolId, fbId, cardId) {
+  var res = document.getElementById(resId);
+  var pool = document.getElementById(poolId);
+  var fb = document.getElementById(fbId);
+  if (res) res.innerHTML = '';
+  if (pool) pool.querySelectorAll('.sb-frag').forEach(function(f){ f.classList.remove('used'); });
+  if (fb) fb.textContent = '';
+  var card = document.getElementById(cardId);
+  if (card) card.classList.remove('done');
+};
+
+window.sbToggleAnswerTeil = function(ansId, btnId) {
+  var el = document.getElementById(ansId);
+  var btn = document.getElementById(btnId);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    btn.textContent = '🙈 Скрыть';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '👁 Ответ';
+  }
+};
+
+// ─── INIT ───
+window.addEventListener('hashchange', route);
+window.addEventListener('DOMContentLoaded', function() {
+  renderStats();
+  renderGrid();
+  route();
+});
+</script>
+
+</body>
+</html>
