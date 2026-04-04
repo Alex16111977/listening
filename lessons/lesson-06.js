@@ -148,6 +148,8 @@ var LESSON_06 = {
           literal: 'Я звоню по поручению от доктора Козловски',
           literary: 'Я звоню по поручению доктора Козловски.'
         },
+        'Ich rufe im Auftrag von Dr.': { literal: 'Я звоню по поручению доктора', literary: 'Я звоню по поручению доктора' },
+        'Koslowski an.': { literal: 'Козловски', literary: 'Козловски.' },
         'Ich soll Ihnen sagen, dass Sie heute erst um 12 Uhr 30 in seine Praxis kommen sollen und nicht schon um 11 Uhr.': {
           literal: 'Я должна Вам сказать, что Вы сегодня только в 12 часов 30 в его практику прийти должны и не уже в 11 часов',
           literary: 'Я должна Вам передать, что Вы должны прийти в его кабинет сегодня только в 12:30, а не в 11 часов.'

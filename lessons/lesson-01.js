@@ -205,6 +205,7 @@ var LESSON_01 = {
       sentenceTranslations: {
         'Und jetzt noch eine Information für unsere Musikfreunde.': { literal: 'И сейчас ещё одна информация для наших музыкальных-друзей', literary: 'А сейчас ещё одна информация для наших любителей музыки.' },
         'Ab 20 Uhr können Sie wieder bei unserem Spiel mitmachen.': { literal: 'С 20 часов можете Вы снова при нашей игре участвовать', literary: 'С 20 часов вы снова можете принять участие в нашей игре.' },
+        'Ab 20 Uhr können Sie wieder bei unserem Spiel \u201eWer kennt das Instrument?\u201c mitmachen.': { literal: 'С 20 часов можете Вы снова при нашей игре «Кто знает инструмент?» участвовать', literary: 'С 20 часов вы снова можете принять участие в нашей игре «Кто знает инструмент?».' },
         'Wenn Sie wissen, wie die Musikinstrumente heißen, rufen Sie uns einfach an.': { literal: 'Если Вы знаете, как музыкальные-инструменты называются, звоните Вы нам просто', literary: 'Если вы знаете, как называются музыкальные инструменты, просто позвоните нам.' },
         'Sie können Eintrittskarten für das Mozart-Konzert am Freitag gewinnen.': { literal: 'Вы можете входные-билеты для концерта-Моцарта в пятницу выиграть', literary: 'Вы можете выиграть билеты на концерт Моцарта в пятницу.' },
         'Also gut zuhören beim Ratespiel um 8.': { literal: 'Итак хорошо слушать при игре-загадке в 8', literary: 'Так что внимательно слушайте викторину в 8 часов.' },
@@ -261,6 +262,9 @@ var LESSON_01 = {
         'Zwei Wochen Spanien war als Student zu teuer.': { literal: 'Две недели Испания было как студент слишком дорого', literary: 'Две недели в Испании для студента слишком дорого.' },
         'Maria und Stefan haben auch im Sommer gearbeitet, sogar zwei Monate lang.': { literal: 'Мария и Штефан имеют также летом работали, даже два месяца долго', literary: 'Мария и Штефан тоже работали летом, целых два месяца.' },
         'Stefan hat jeden Abend Tennis gespielt.': { literal: 'Штефан имеет каждый вечер теннис играл', literary: 'Штефан каждый вечер играл в теннис.' },
+        'Maria wollte ja zuerst auch mitfahren, aber dann ist sie doch zu Hause geblieben.': { literal: 'Мария хотела же сначала тоже поехать, но потом она всё-таки дома осталась', literary: 'Мария тоже сначала хотела поехать, но потом осталась дома.' },
+        'Mit dem Fahrrad brauche ich eine Stunde und mit dem Bus 40 Minuten.': { literal: 'С велосипедом нуждаюсь я один час и с автобусом 40 минут', literary: 'На велосипеде мне нужен час, а на автобусе 40 минут.' },
+        'Mein Bruder Matthias muss immer für die Universität lernen und meinem Vater im Geschäft helfen.': { literal: 'Мой брат Маттиас должен всегда для университета учить и моему отцу в магазине помогать', literary: 'Мой брат Маттиас всё время учится для университета и помогает отцу в магазине.' },
       },
       vocabulary: [
         { de: 'der Urlaub', plural: 'die Urlaube', ru: 'отпуск', gender: 'maskulin', collocation: 'der Urlaub war toll', example: 'Wie war der Urlaub auf dem Campingplatz?' },
@@ -309,6 +313,7 @@ var LESSON_01 = {
         'Rufen Sie, wenn es Ihnen besser geht.': { literal: 'Звоните Вы, когда оно Вам лучше идёт', literary: 'Позвоните, когда вам станет лучше.' },
         'Hallo Herr N.A., hier ist Nicole Fischer.': { literal: 'Привет господин Н.А., здесь есть Николь Фишер', literary: 'Здравствуйте, это Николь Фишер.' },
         'Hallo Frau Fischer, wie geht es Ihnen?': { literal: 'Привет госпожа Фишер, как идёт оно Вам?', literary: 'Здравствуйте, госпожа Фишер, как у Вас дела?' },
+        'Nicht so gut.': { literal: 'Не так хорошо', literary: 'Не очень хорошо.' },
       },
       vocabulary: [
         { de: 'die Probe', plural: 'die Proben', ru: 'репетиция', gender: 'feminin', collocation: 'zur Probe kommen', example: 'Kann ich heute nicht zur Probe kommen.' },
@@ -543,6 +548,7 @@ var LESSON_01 = {
         'Ich möchte noch sechs Monate in England verbringen.': { literal: 'Я хотела-бы ещё шесть месяцев в Англии провести', literary: 'Я хотела бы провести ещё шесть месяцев в Англии.' },
         'Danach gehe ich nach Portugal zurück und studiere an der Universität.': { literal: 'Потом иду я в Португалию назад и учусь в университете', literary: 'Потом я вернусь в Португалию и буду учиться в университете.' },
         'Ich möchte gern Dolmetscherin werden und später in Brüssel arbeiten.': { literal: 'Я хотела-бы охотно переводчицей стать и позже в Брюсселе работать', literary: 'Я хотела бы стать переводчицей и позже работать в Брюсселе.' },
+        'An der Wand ist ein großer Spiegel und ich darf auch die Fotos von meiner Familie und meinen Freunden aufhängen.': { literal: 'На стене есть большое зеркало и я могу также фотографии от моей семьи и моих друзей вешать', literary: 'На стене большое зеркало, и мне можно вешать фотографии семьи и друзей.' },
       },
       vocabulary: [
         { de: 'der Gast', plural: 'die Gäste', ru: 'гость', gender: 'maskulin', collocation: 'zu Gast haben', example: 'Heute haben wir Ines zu Gast.' },

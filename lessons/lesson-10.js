@@ -304,6 +304,8 @@ var LESSON_10 = {
         'Dir auch alles Gute im neuen Jahr!': { literal: 'Тебе тоже всего хорошего в новом году!', literary: 'Тебе тоже всего хорошего в новом году!' },
         'Danke.': { literal: 'Спасибо', literary: 'Спасибо.' },
         'Also, Weihnachten in Japan... ich weiß nicht.': { literal: 'Ну, Рождество в Японии... я не знаю', literary: 'Ну, Рождество в Японии... не знаю.' },
+        'Also, Weihnachten in Japan...': { literal: 'Итак, Рождество в Японии...', literary: 'Ну, Рождество в Японии...' },
+        'ich weiß nicht.': { literal: 'я не знаю', literary: 'я не знаю.' },
         'Ich brauche meinen Tannenbaum und das Essen mit der Familie.': { literal: 'Я нуждаюсь в моей ёлке и еде с семьёй', literary: 'Мне нужна моя ёлка и семейный ужин.' },
         'In Japan feiert man auch Weihnachten.': { literal: 'В Японии празднуют также Рождество', literary: 'В Японии тоже празднуют Рождество.' },
         'Das ist dort sehr in Mode.': { literal: 'Это есть там очень в моде', literary: 'Там это очень модно.' },

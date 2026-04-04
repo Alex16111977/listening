@@ -153,6 +153,8 @@ var LESSON_28 = {
       sentenceTranslations: {
         'Guten Tag, Herr Lohmann.': { literal: 'Добрый день, господин Ломан', literary: 'Добрый день, господин Ломан.' },
         'Hier Zahnarztpraxis Dr. Lemmer.': { literal: 'Здесь стоматологическая практика доктора Леммера', literary: 'Стоматологическая клиника доктора Леммера.' },
+        'Hier Zahnarztpraxis Dr.': { literal: 'Здесь зубоврачебная-практика доктора', literary: 'Стоматологическая клиника доктора' },
+        'Lemmer.': { literal: 'Леммер', literary: 'Леммер.' },
         'Sie haben morgen am Dienstag um 14 Uhr einen Termin.': { literal: 'Вы имеете завтра во вторник в 14 часов запись', literary: 'У вас завтра, во вторник, запись на 14:00.' },
         'Leider ist Herr Lemmer heute und morgen krank.': { literal: 'К сожалению есть господин Леммер сегодня и завтра болен', literary: 'К сожалению, доктор Леммер сегодня и завтра болен.' },
         'Können Sie am Mittwoch um 10 Uhr kommen?': { literal: 'Можете вы в среду в 10 часов прийти', literary: 'Можете ли вы прийти в среду в 10 часов?' },
@@ -538,6 +540,7 @@ var LESSON_28 = {
         'Dann aber hat meine Freundin gesagt: „Du hast doch ein schnelles Fahrrad.': { literal: 'Тогда но сказала моя подруга: «Ты имеешь же быстрый велосипед', literary: 'Но потом моя подруга сказала: «У тебя же быстрый велосипед.' },
         'Geh doch mal in die Pizzeria und sprich dort mit dem Chef.': { literal: 'Иди же разок в пиццерию и поговори там с шефом', literary: 'Сходи-ка в пиццерию и поговори там с начальником.' },
         'Vielleicht brauchst du ja für den Job kein Auto."': { literal: 'Возможно нужен тебе же для работы никакой автомобиль', literary: 'Может, для этой работы тебе и не нужна машина».' },
+        'Vielleicht brauchst du ja für den Job kein Auto." Und haben Sie das gemacht?': { literal: 'Возможно нужен тебе же для работы никакой автомобиль. И сделали Вы это?', literary: 'Может, для этой работы тебе и не нужна машина». И вы так и сделали?' },
         'Und haben Sie das gemacht?': { literal: 'И сделали Вы это', literary: 'И вы так и сделали?' },
         'Ja, ich bin da vorbeigegangen und habe mit dem Chef geredet.': { literal: 'Да, я прошёл мимо и поговорил с шефом', literary: 'Да, я зашёл туда и поговорил с начальником.' },
         'Der Chef war sehr freundlich, und als ich ihm erzählt habe, dass ich die Stadt sehr gut kenne und super schnell Fahrrad fahren kann, hat er mir den Job gegeben – auch ohne Auto.': { literal: 'Шеф был очень дружелюбный, и когда я ему рассказал, что я город очень хорошо знаю и супер быстро на велосипеде ехать могу, дал он мне работу — также без машины', literary: 'Начальник был очень приветливый, и когда я рассказал, что хорошо знаю город и быстро езжу на велосипеде, он дал мне работу — даже без машины.' },

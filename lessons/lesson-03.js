@@ -637,6 +637,8 @@ var LESSON_03 = {
           literal: 'Здесь говорит К. от турагентства Быстро прочь.',
           literary: 'Это К. из турагентства "Быстро в путь".'
         },
+        'Hier spricht K.': { literal: 'Здесь говорит К.', literary: 'Это К.' },
+        'vom Reisebüro Schnell weg.': { literal: 'от турагентства Быстро прочь', literary: 'из турагентства «Быстро в путь».' },
         'Was kann ich für Sie tun?': {
           literal: 'Что могу я для вас сделать?',
           literary: 'Чем могу помочь?'

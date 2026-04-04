@@ -452,6 +452,8 @@ var LESSON_25 = {
         'Wie geht es Ihnen?': { literal: 'Как идёт оно вам?', literary: 'Как вы себя чувствуете?' },
         'Haben Sie sich wieder beim Sport verletzt?': { literal: 'Имеете вы себя снова при спорте поранено?', literary: 'Вы опять травмировались на спорте?' },
         'Tag, Dr. Polle.': { literal: 'День, доктор Полле', literary: 'Добрый день, доктор Полле.' },
+        'Tag, Dr.': { literal: 'День, доктор', literary: 'Добрый день, доктор' },
+        'Polle.': { literal: 'Полле', literary: 'Полле.' },
         'Kann ich in die Sprechstunde kommen?': { literal: 'Могу я в приёмные часы прийти?', literary: 'Могу я прийти на приём?' },
         'Mir geht es nicht gut.': { literal: 'Мне идёт это не хорошо', literary: 'Мне плохо.' },
         'Ich habe starke Bauchschmerzen und gestern tat mir auch der Kopf weh.': { literal: 'Я имею сильные живот-боли и вчера делал мне тоже голова больно', literary: 'У меня сильные боли в животе, и вчера ещё и голова болела.' },

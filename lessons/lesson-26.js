@@ -114,6 +114,8 @@ var LESSON_26 = {
       sentenceTranslations: {
         'Wir kommen zum Verkehr.': { literal: 'Мы приходим к движению', literary: 'Переходим к транспортным новостям.' },
         'Die Buslinie 143 fährt von heute bis zum 20. Februar nicht ab Hauptbahnhof.': { literal: 'Автобусная линия 143 едет с сегодня до 20 февраля не от главного вокзала', literary: 'Автобус №143 с сегодняшнего дня до 20 февраля не отправляется от главного вокзала.' },
+        'Die Buslinie 143 fährt von heute bis zum 20.': { literal: 'Автобусная-линия 143 ездит от сегодня до 20-го', literary: 'Автобус 143 с сегодняшнего дня до 20-го' },
+        'Februar nicht ab Hauptbahnhof.': { literal: 'февраля не от главного-вокзала', literary: 'февраля не отходит от главного вокзала.' },
         'Sie beginnt am Marientor.': { literal: 'Она начинается у Мариентор', literary: 'Маршрут начинается от Мариентор.' },
         'Bitte nutzen Sie ab Hauptbahnhof die Straßenbahn M9 bis Marientor oder fahren Sie mit der U-Bahn bis Heumarkt und steigen dort um.': { literal: 'Пожалуйста используйте от главного вокзала трамвай М9 до Мариентор или езжайте с метро до Хоймаркт и пересаживайтесь там', literary: 'Пожалуйста, от главного вокзала пользуйтесь трамваем М9 до Мариентор или поезжайте на метро до Хоймаркт и пересядьте там.' },
       },

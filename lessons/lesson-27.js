@@ -111,6 +111,8 @@ var LESSON_27 = {
       sentenceTranslations: {
         'Wir kommen zum Verkehr.': { literal: 'Мы приходим к движению.', literary: 'Переходим к транспортным новостям.' },
         'Die Buslinie 143 fährt von heute bis zum 20. Februar nicht ab Hauptbahnhof.': { literal: 'Автобусная линия 143 едет от сегодня до 20 февраля не от главного вокзала.', literary: 'Автобусная линия 143 с сегодняшнего дня до 20 февраля не отправляется от Главного вокзала.' },
+        'Die Buslinie 143 fährt von heute bis zum 20.': { literal: 'Автобусная-линия 143 ездит от сегодня до 20-го', literary: 'Автобус 143 с сегодняшнего дня до 20-го' },
+        'Februar nicht ab Hauptbahnhof.': { literal: 'февраля не от главного-вокзала', literary: 'февраля не отходит от главного вокзала.' },
         'Sie beginnt am Marientor.': { literal: 'Она начинается у Мариентор.', literary: 'Она начинается от Мариентор.' },
         'Bitte nutzen Sie ab Hauptbahnhof die Straßenbahn M9 bis Marientor oder fahren Sie mit der U-Bahn bis Heumarkt und steigen dort um.': { literal: 'Пожалуйста используйте вы от главного вокзала трамвай М9 до Мариентор или езжайте вы с метро до Хоймаркт и пересаживайтесь там пере.', literary: 'Пожалуйста, от Главного вокзала используйте трамвай М9 до Мариентор или поезжайте на метро до Хоймаркт и там пересаживайтесь.' },
       },
@@ -286,6 +288,8 @@ var LESSON_27 = {
         'Oxana, die hat doch heute frei.': { literal: 'Оксана, та имеет же сегодня свободно.', literary: 'Оксана же сегодня выходной.' },
         'Sie fährt bei irgendeinem Schulausflug von ihrer Tochter mit.': { literal: 'Она едет при какой-то школьной экскурсии от её дочери с.', literary: 'Она едет на школьную экскурсию с дочерью.' },
         'In den Zoo, glaube ich, oder... Nein, an die Spree.': { literal: 'В зоопарк, верю я, или... Нет, к Шпрее.', literary: 'В зоопарк, кажется... Нет, на Шпрее.' },
+        'In den Zoo, glaube ich, oder...': { literal: 'В зоопарк, думаю я, или...', literary: 'В зоопарк, мне кажется, или...' },
+        'Nein, an die Spree.': { literal: 'Нет, к Шпрее', literary: 'Нет, на Шпрее.' },
         'Sie machen eine Flussfahrt mit Picknick.': { literal: 'Они делают речную поездку с пикником.', literary: 'У них речная прогулка с пикником.' },
         'Dann fehlt ja nur noch Robert.': { literal: 'Тогда не хватает ведь только ещё Роберт.', literary: 'Тогда не хватает только Роберта.' },
         'Ach ja, Entschuldigung, das habe ich ganz vergessen.': { literal: 'Ах да, извинение, это имею я совсем забыл.', literary: 'Ах да, извини, я совсем забыла.' },

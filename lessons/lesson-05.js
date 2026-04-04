@@ -199,6 +199,8 @@ var LESSON_05 = {
         'Heute steht das Rentenalter immer wieder zur Diskussion.': { literal: 'Сегодня стоит пенсионный-возраст всё снова к дискуссии', literary: 'Сегодня пенсионный возраст постоянно обсуждается.' },
         'Viele werden in einigen Jahren erst ab 67 Rente bekommen.': { literal: 'Многие будут через несколько лет только с 67 пенсию получать', literary: 'Многие через несколько лет будут получать пенсию только с 67.' },
         'Heute aber gehen die meisten Deutschen schon vor dem 65. Lebensjahr in Rente.': { literal: 'Сегодня однако идут большинство немцев уже до 65-го года-жизни на пенсию', literary: 'Но сегодня большинство немцев выходят на пенсию ещё до 65 лет.' },
+        'Heute aber gehen die meisten Deutschen schon vor dem 65.': { literal: 'Сегодня однако идут большинство немцев уже перед 65-м', literary: 'Сегодня, однако, большинство немцев уходят уже до 65-го' },
+        'Lebensjahr in Rente.': { literal: 'года-жизни на пенсию', literary: 'года жизни на пенсию.' },
       },
       vocabulary: [
         { de: 'die Rente', plural: 'die Renten', ru: 'пенсия', gender: 'feminin', collocation: 'Rente bekommen', example: 'Er fragt, ab wann man in Deutschland Rente bekommt.' },
