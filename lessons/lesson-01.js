@@ -205,7 +205,7 @@ var LESSON_01 = {
       sentenceTranslations: {
         'Und jetzt noch eine Information für unsere Musikfreunde.': { literal: 'И сейчас ещё одна информация для наших музыкальных-друзей', literary: 'А сейчас ещё одна информация для наших любителей музыки.' },
         'Ab 20 Uhr können Sie wieder bei unserem Spiel mitmachen.': { literal: 'С 20 часов можете Вы снова при нашей игре участвовать', literary: 'С 20 часов вы снова можете принять участие в нашей игре.' },
-        'Ab 20 Uhr können Sie wieder bei unserem Spiel \u201eWer kennt das Instrument?\u201c mitmachen.': { literal: 'С 20 часов можете Вы снова при нашей игре «Кто знает инструмент?» участвовать', literary: 'С 20 часов вы снова можете принять участие в нашей игре «Кто знает инструмент?».' },
+        'Ab 20 Uhr können Sie wieder bei unserem Spiel \u201eWer kennt das Instrument?" mitmachen.': { literal: 'С 20 часов можете Вы снова при нашей игре «Кто знает инструмент?» участвовать', literary: 'С 20 часов вы снова можете принять участие в нашей игре «Кто знает инструмент?».' },
         'Wenn Sie wissen, wie die Musikinstrumente heißen, rufen Sie uns einfach an.': { literal: 'Если Вы знаете, как музыкальные-инструменты называются, звоните Вы нам просто', literary: 'Если вы знаете, как называются музыкальные инструменты, просто позвоните нам.' },
         'Sie können Eintrittskarten für das Mozart-Konzert am Freitag gewinnen.': { literal: 'Вы можете входные-билеты для концерта-Моцарта в пятницу выиграть', literary: 'Вы можете выиграть билеты на концерт Моцарта в пятницу.' },
         'Also gut zuhören beim Ratespiel um 8.': { literal: 'Итак хорошо слушать при игре-загадке в 8', literary: 'Так что внимательно слушайте викторину в 8 часов.' },
