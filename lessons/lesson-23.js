@@ -608,6 +608,48 @@ var LESSON_23 = {
     },
   ],
 
+  get vocabulary() {
+    var all = [];
+    var seen = {};
+    this.texts.forEach(function(t) {
+      t.vocabulary.forEach(function(v) {
+        if (!seen[v.de]) {
+          seen[v.de] = true;
+          all.push({
+            de: v.de,
+            ru: v.ru,
+            gender: v.gender || null,
+            example: v.example || v.collocation || '',
+          });
+        }
+      });
+    });
+    return all;
+  },
+
+  get sentenceTranslations() {
+    var map = {};
+    this.texts.forEach(function(t) {
+      for (var de in t.sentenceTranslations) {
+        map[de] = typeof t.sentenceTranslations[de] === 'string' ? t.sentenceTranslations[de] : (t.sentenceTranslations[de].literary || '');
+      }
+    });
+    return map;
+  },
+
+  get comprehensionQuiz() {
+    return this.texts.map(function(t) {
+      return {
+        question: t.question.de,
+        questionRu: t.question.ru,
+        options: t.question.options.map(function(o) { return o.de; }),
+        correct: t.question.options[t.question.correct].de,
+        explanation: t.question.explanation,
+        textName: t.name,
+      };
+    });
+  },
+
   /* ─── промты ─── */
   prompts: {
     exercises: {

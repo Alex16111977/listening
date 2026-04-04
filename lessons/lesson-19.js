@@ -259,6 +259,13 @@ var LESSON_19 = {
         'Dann können wir zusammen zu Christine gehen."': { literal: 'Тогда можем мы вместе к Кристине идти', literary: 'Тогда мы сможем вместе пойти к Кристине.' },
         '"Um 6:30 Uhr passt es mir besser."': { literal: 'В 6:30 подходит оно мне лучше', literary: 'В 6:30 мне подходит лучше.' },
         '"Okay, okay, abgemacht!"': { literal: 'Окей, окей, договорились!', literary: 'Ладно, ладно, договорились!' },
+        'Warum hast du so viele Chipstüten gekauft?" "Hallo Martin!': { literal: 'Почему имеешь ты так много пакетов чипсов купленными?" "Привет Мартин!', literary: 'Почему ты купила так много пакетов чипсов?" "Привет, Мартин!' },
+        'Hast du das vergessen?" "Du, das habe ich nicht gewusst.': { literal: 'Имеешь ты это забытым?" "Ты, это имею я не знанным', literary: 'Ты это забыл?" "Слушай, я этого не знал.' },
+        'Und wieso treffen wir uns bei Christine?" "Mensch Martin, ihre Eltern haben eine Home-Cinema-Anlage gekauft und wir wollen zwei tolle Filme sehen.': { literal: 'И почему встречаем мы себя у Кристины?" "Человек Мартин, её родители имеют домашний-кинотеатр купленным и мы хотим два классных фильма видеть', literary: 'И почему мы встречаемся у Кристины?" "Ну Мартин, её родители купили домашний кинотеатр, и мы хотим посмотреть два классных фильма.' },
+        'Silke bringt Pizza mit, die ihre Mama für uns macht." "Echt?': { literal: 'Зильке приносит пиццу с-собой, которую её мама для нас делает." "Правда?', literary: 'Зильке принесёт пиццу, которую её мама готовит для нас." "Правда?' },
+        'Silkes Mama macht die leckerste Pizza der Welt!" "Boris bringt die Getränke mit, also Cola und Fanta, und Tim hausgemachten Apfelkuchen.': { literal: 'Зильке мама делает вкуснейшую пиццу мира!" "Борис приносит напитки с-собой, итак колу и фанту, и Тим домашний яблочный пирог', literary: 'Мама Зильке делает самую вкусную пиццу в мире!" "Борис принесёт напитки — колу и фанту, а Тим — домашний яблочный пирог.' },
+        'Und ich, ich habe keine Ahnung, was ich mitbringen soll." "Du kannst doch Süßigkeiten mitbringen." "Gute Idee!': { literal: 'И я, я имею никакое понятие, что я принести-с-собой должна." "Ты можешь же сладости принести-с-собой." "Хорошая идея!', literary: 'А я понятия не имею, что мне принести." "Ты же можешь принести сладости." "Хорошая идея!' },
+        'Dann können wir zusammen zu Christine gehen." "Um 6:30 Uhr passt es mir besser." "Okay, okay, abgemacht!"': { literal: 'Тогда можем мы вместе к Кристине идти." "В 6:30 подходит оно мне лучше." "Окей, окей, договорились!"', literary: 'Тогда мы сможем вместе пойти к Кристине." "В 6:30 мне подходит лучше." "Ладно, ладно, договорились!"' },
       },
       vocabulary: [
         { de: 'die Chipstüte', plural: 'die Chipstüten', ru: 'пакет чипсов', gender: 'feminin', collocation: 'viele Chipstüten kaufen', example: 'Warum hast du so viele Chipstüten gekauft?' },
@@ -307,6 +314,9 @@ var LESSON_19 = {
         'Das hast du leider vergessen."': { literal: 'Это имеешь ты к сожалению забытым', literary: 'Ты это, к сожалению, забыла.' },
         '"Da hast du recht.': { literal: 'Тут имеешь ты правоту', literary: 'Тут ты права.' },
         'Dann gehe ich jetzt noch mal."': { literal: 'Тогда иду я сейчас ещё раз', literary: 'Тогда я сейчас ещё раз схожу.' },
+        '"Anja, könntest du bitte einkaufen gehen?" "Schon wieder, Mama?': { literal: 'Аня, могла бы ты пожалуйста покупать идти?" "Уже снова, мама?', literary: 'Аня, ты могла бы сходить за покупками?" "Опять, мама?' },
+        'Ich war doch gestern im Supermarkt." "Stimmt, aber du hast nur Fleisch und Fisch gekauft.': { literal: 'Я была же вчера в супермаркете." "Правда, но ты имеешь только мясо и рыбу купленными', literary: 'Я же вчера была в супермаркете." "Правда, но ты купила только мясо и рыбу.' },
+        'Das hast du leider vergessen." "Da hast du recht.': { literal: 'Это имеешь ты к сожалению забытым." "Тут имеешь ты правоту', literary: 'Ты это, к сожалению, забыла." "Тут ты права.' },
       },
       vocabulary: [
         { de: 'der Supermarkt', plural: 'die Supermärkte', ru: 'супермаркет', gender: 'maskulin', collocation: 'im Supermarkt', example: 'Ich war doch gestern im Supermarkt.' },
@@ -348,6 +358,8 @@ var LESSON_19 = {
         'Erdkunde?"': { literal: 'География?', literary: 'География?' },
         '"Nein, warte, wir haben Biologie.': { literal: 'Нет, подожди, мы имеем биологию', literary: 'Нет, подожди, у нас биология.' },
         'Erdkunde hatten wir gestern."': { literal: 'Географию имели мы вчера', literary: 'География была у нас вчера.' },
+        '"Joachim, weißt du, was wir jetzt in der dritten Stunde haben?" "Ich glaube Geschichte oder Physik." "Nein, Geschichte haben wir in der vierten Stunde und in der fünften haben wir..." "Physik haben wir in der dritten nicht.': { literal: 'Йоахим, знаешь ты, что мы сейчас в третьем уроке имеем?" "Я думаю история или физика." "Нет, историю имеем мы в четвёртом уроке и в пятом имеем мы..." "Физику имеем мы в третьем не', literary: 'Йоахим, ты знаешь, что у нас сейчас на третьем уроке?" "Думаю, история или физика." "Нет, история у нас на четвёртом уроке, а на пятом у нас..." "Физики на третьем у нас нет.' },
+        'Erdkunde?" "Nein, warte, wir haben Biologie.': { literal: 'География?" "Нет, подожди, мы имеем биологию', literary: 'География?" "Нет, подожди, у нас биология.' },
       },
       vocabulary: [
         { de: 'die Stunde', plural: 'die Stunden', ru: 'урок', gender: 'feminin', collocation: 'in der dritten Stunde', example: '"Joachim, weißt du, was wir jetzt in der dritten Stunde haben?"' },
@@ -393,6 +405,8 @@ var LESSON_19 = {
         '"Und warum fährst du nicht mit dem Auto?"': { literal: 'И почему едешь ты не с машиной?', literary: 'А почему ты не едешь на машине?' },
         '"Das ist viel zu teuer."': { literal: 'Это есть намного слишком дорого', literary: 'Это слишком дорого.' },
         '"Dann wünsche ich dir schöne Ferien!"': { literal: 'Тогда желаю я тебе красивые каникулы!', literary: 'Тогда желаю тебе хороших каникул!' },
+        'Stimmt\'s?" "Ja, du weißt doch, dass ich schon immer dahin wollte." "Hast du schon Flugtickets gebucht?" "Ich werde nicht fliegen.': { literal: 'Правда это?" "Да, ты знаешь же, что я уже всегда туда хотел." "Имеешь ты уже билеты на самолёт забронированными?" "Я буду не летать', literary: 'Это правда?" "Да, ты же знаешь, что я всегда туда хотел." "Ты уже забронировал билеты на самолёт?" "Я не полечу.' },
+        'Dann kann ich auch mehr sehen." "Und warum fährst du nicht mit dem Auto?" "Das ist viel zu teuer." "Dann wünsche ich dir schöne Ferien!"': { literal: 'Тогда могу я также больше видеть." "И почему едешь ты не с машиной?" "Это есть намного слишком дорого." "Тогда желаю я тебе красивые каникулы!"', literary: 'Тогда я смогу больше увидеть." "А почему ты не едешь на машине?" "Это слишком дорого." "Тогда желаю тебе хороших каникул!"' },
       },
       vocabulary: [
         { de: 'das Flugticket', plural: 'die Flugtickets', ru: 'билет на самолёт', gender: 'neutrum', collocation: 'Flugtickets buchen', example: '"Hast du schon Flugtickets gebucht?"' },
@@ -436,6 +450,9 @@ var LESSON_19 = {
         'Ein Brötchen mit Käse und Wurst bekommst du auch."': { literal: 'Булочку с сыром и колбасой получаешь ты тоже', literary: 'Булочку с сыром и колбасой тоже получишь.' },
         '"Ich hätte lieber einen Kakao.': { literal: 'Я имел бы лучше какао', literary: 'Я лучше выпью какао.' },
         'Das Brötchen nehme ich mit und esse in der Pause."': { literal: 'Булочку беру я с-собой и ем в паузе', literary: 'Булочку я возьму с собой и съем на перемене.' },
+        '"Jens, möchtest du zum Frühstück außer Milch auch ein Ei?" "Mama, ich habe keinen Hunger.': { literal: 'Йенс, хотел бы ты к завтраку кроме молока также яйцо?" "Мама, я имею никакой голод', literary: 'Йенс, ты хочешь на завтрак кроме молока ещё и яйцо?" "Мама, я не голоден.' },
+        'Ich möchte nicht frühstücken." "Du musst aber etwas essen.': { literal: 'Я хотел бы не завтракать." "Ты должен однако что-то есть', literary: 'Я не хочу завтракать." "Но ты должен что-то поесть.' },
+        'Ein Brötchen mit Käse und Wurst bekommst du auch." "Ich hätte lieber einen Kakao.': { literal: 'Булочку с сыром и колбасой получаешь ты тоже." "Я имел бы лучше какао', literary: 'Булочку с сыром и колбасой тоже получишь." "Я лучше выпью какао.' },
       },
       vocabulary: [
         { de: 'das Frühstück', plural: 'die Frühstücke', ru: 'завтрак', gender: 'neutrum', collocation: 'zum Frühstück', example: '"Jens, möchtest du zum Frühstück außer Milch auch ein Ei?"' },
@@ -483,6 +500,9 @@ var LESSON_19 = {
         'Die sind doch für alle gut.': { literal: 'Те есть же для всех хорошие', literary: 'Они ведь хороши для всех.' },
         'Musicalfilme mögen die Jungs nicht und Computerspiele die Mädchen.': { literal: 'Мюзикл-фильмы нравятся мальчикам не и компьютерные игры девочкам', literary: 'Мюзиклы не нравятся мальчикам, а компьютерные игры — девочкам.' },
         'Ich glaube, das ist das Richtige."': { literal: 'Я думаю, это есть правильное', literary: 'Думаю, это то, что нужно.' },
+        'Ich habe einige zu Hause, die habe ich schon gesehen und die sind wirklich gut." "Keine schlechte Idee, aber Computerspiele sind interessanter." "Oder...': { literal: 'Я имею некоторые дома, те имею я уже виденными и те есть действительно хорошие." "Никакая плохая идея, но компьютерные игры есть интереснее." "Или...', literary: 'У меня есть несколько дома, я их уже видела, и они действительно хорошие." "Неплохая идея, но компьютерные игры интереснее." "Или...' },
+        'ja, für Jungs.': { literal: 'да, для мальчиков', literary: 'да, для мальчиков.' },
+        'Mädchen kaufen so etwas bestimmt nicht." "Da hast du recht.': { literal: 'Девочки покупают такое нечто точно не." "Тут имеешь ты правоту', literary: 'Девочки такое точно не покупают." "Тут ты прав.' },
       },
       vocabulary: [
         { de: 'der Schulbasar', plural: 'die Schulbasare', ru: 'школьный базар', gender: 'maskulin', collocation: 'auf dem Schulbasar', example: '"Julia, ich glaube, dass wir auf dem Schulbasar Musicalfilme verkaufen sollten.' },
@@ -548,6 +568,18 @@ var LESSON_19 = {
         '"Das ist in der Tat einer der ältesten und nützlichsten Tipps für einen gesunden Schlaf."': { literal: 'Это есть на деле один из старейших и полезнейших советов для здорового сна', literary: 'Это действительно один из старейших и самых полезных советов для здорового сна.' },
         '"Dr. Hellmann, herzlichen Dank für das Interview!': { literal: 'Доктор Хельман, сердечную благодарность за интервью!', literary: 'Доктор Хельман, сердечно благодарим за интервью!' },
         'Bis nächste Woche mit dem Thema \'Wie ernähren sich Jugendliche heute?\'"': { literal: 'До следующей недели с темой "Как питаются себя подростки сегодня?"', literary: 'До следующей недели с темой "Как питаются подростки сегодня?"' },
+        '"Dr.': { literal: '"Доктор', literary: '"Доктор' },
+        'Hellmann, Sie waren schon mehrmals Gast in unserer Sendung \'Mensch und Gesundheit\'.': { literal: 'Хельман, Вы были уже несколько раз гостем в нашей передаче "Человек и Здоровье"', literary: 'Хельман, Вы уже неоднократно были гостем нашей передачи "Человек и Здоровье".' },
+        'Willkommen also auch heute bei uns!" "Guten Abend!" "Unser Thema heute ist der Schlaf.': { literal: 'Добро пожаловать итак также сегодня у нас!" "Добрый вечер!" "Наша тема сегодня есть сон', literary: 'Добро пожаловать и сегодня к нам!" "Добрый вечер!" "Наша тема сегодня — сон.' },
+        'Wie wichtig ist der Schlaf für uns Menschen?" "Tja, wissenschaftliche Untersuchungen haben gezeigt, dass alle Menschen, vor allem aber Kinder und Jugendliche, genug Schlaf brauchen." "Was bedeutet denn \'genug Schlaf\'?" "So genau kann man das nicht sagen.': { literal: 'Как важен есть сон для нас людей?" "Ну, научные исследования имеют показанным, что все люди, прежде всего но дети и подростки, достаточно сна нуждаются." "Что означает же «достаточно сна»?" "Так точно может человек это не сказать', literary: 'Насколько важен сон для нас, людей?" "Что ж, научные исследования показали, что всем людям, и прежде всего детям и подросткам, нужен достаточный сон." "А что значит «достаточно сна»?" "Точно это сказать нельзя.' },
+        'Kinder und Jugendliche brauchen aber auf jeden Fall mehr Schlaf als Erwachsene." "Tatsächlich?': { literal: 'Дети и подростки нуждаются однако в каждом случае больше сна чем взрослые." "Действительно?', literary: 'Но детям и подросткам однозначно нужно больше сна, чем взрослым." "Действительно?' },
+        'Wie viel denn?" "Wissenschaftler glauben, dass sechs bis acht Stunden Schlaf für Erwachsene genug sind.': { literal: 'Как много же?" "Учёные считают, что шесть до восемь часов сна для взрослых достаточно есть', literary: 'А сколько?" "Учёные считают, что шести-восьми часов сна для взрослых достаточно.' },
+        'Kinder brauchen etwa acht bis zehn Stunden, um gesund zu bleiben." "Das sind ja ziemlich genaue Angaben.': { literal: 'Дети нуждаются примерно восемь до десять часов, чтобы здоровыми оставаться." "Это есть же довольно точные данные', literary: 'Детям нужно около 8-10 часов, чтобы оставаться здоровыми." "Это довольно точные данные.' },
+        'Und was passiert, wenn Kinder und Jugendliche nicht genug schlafen?" "Oft können sich dann die Jugendlichen in der Schule nicht konzentrieren oder haben Kopfschmerzen.': { literal: 'И что происходит, когда дети и подростки не достаточно спят?" "Часто могут себя тогда подростки в школе не концентрировать или имеют головные боли', literary: 'И что происходит, если дети и подростки недостаточно спят?" "Часто подростки не могут сосредоточиться в школе или у них болит голова.' },
+        'Sie fühlen sich einfach schwach." "Können Sie sagen, was wichtig für einen gesunden Schlaf ist?" "Wichtig ist, dass man immer zur gleichen Zeit schlafen geht und vor dem Schlafengehen nicht fernsieht oder Computerspiele macht." "Gibt es auch konkrete Tipps, die das Schlafzimmer betreffen?" "Das Schlafzimmer muss vor allem recht groß sein, wie auch das Bett.': { literal: 'Они чувствуют себя просто слабыми." "Можете Вы сказать, что важно для здорового сна есть?" "Важно есть, что человек всегда к одинаковому времени спать идёт и перед засыпанием не телевизор-смотрит или компьютерные игры делает." "Даёт оно также конкретные советы, которые спальню касаются?" "Спальня должна прежде всего довольно большой быть, как также кровать', literary: 'Они просто чувствуют себя слабыми." "Можете сказать, что важно для здорового сна?" "Важно всегда ложиться спать в одно и то же время и не смотреть телевизор или играть в компьютерные игры перед сном." "Есть ли также конкретные советы относительно спальни?" "Спальня должна быть достаточно большой, как и кровать.' },
+        'Am wichtigsten ist aber, dass man bei geöffnetem Fenster schläft." "Das Fenster nicht schließen?': { literal: 'Наиважнейшее есть однако, что человек при открытом окне спит." "Окно не закрывать?', literary: 'Но самое важное — спать при открытом окне." "Окно не закрывать?' },
+        'Das kenne ich von meinen Großeltern." "Das ist in der Tat einer der ältesten und nützlichsten Tipps für einen gesunden Schlaf." "Dr.': { literal: 'Это знаю я от моих бабушки-и-дедушки." "Это есть на деле один из старейших и полезнейших советов для здорового сна." "Доктор', literary: 'Это я знаю от своих бабушки и дедушки." "Это действительно один из старейших и самых полезных советов для здорового сна." "Доктор' },
+        'Hellmann, herzlichen Dank für das Interview!': { literal: 'Хельман, сердечную благодарность за интервью!', literary: 'Хельман, сердечно благодарим за интервью!' },
       },
       vocabulary: [
         { de: 'der Gast', plural: 'die Gäste', ru: 'гость', gender: 'maskulin', collocation: 'Gast in unserer Sendung', example: '"Dr. Hellmann, Sie waren schon mehrmals Gast in unserer Sendung \'Mensch und Gesundheit\'.' },
@@ -585,18 +617,35 @@ var LESSON_19 = {
     },
   ],
 
-  /* ─── Агрегированные переводы предложений для конструктора ─── */
+  get vocabulary() {
+    var all = [];
+    var seen = {};
+    this.texts.forEach(function(t) {
+      t.vocabulary.forEach(function(v) {
+        if (!seen[v.de]) {
+          seen[v.de] = true;
+          all.push({
+            de: v.de,
+            ru: v.ru,
+            gender: v.gender || null,
+            example: v.example || v.collocation || '',
+          });
+        }
+      });
+    });
+    return all;
+  },
+
   get sentenceTranslations() {
     var map = {};
     this.texts.forEach(function(t) {
       for (var de in t.sentenceTranslations) {
-        map[de] = t.sentenceTranslations[de].literary;
+        map[de] = typeof t.sentenceTranslations[de] === 'string' ? t.sentenceTranslations[de] : (t.sentenceTranslations[de].literary || '');
       }
     });
     return map;
   },
 
-  /* ─── Вопросы на понимание (comprehensionQuiz) ─── */
   get comprehensionQuiz() {
     return this.texts.map(function(t) {
       return {

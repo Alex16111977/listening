@@ -28,6 +28,14 @@ var LESSON_31 = {
         'Alle Termine werden auf die nächste Woche verschoben.': { literal: 'Все приёмы становятся на следующую неделю перенесенными.', literary: 'Все приёмы переносятся на следующую неделю.' },
         'Sie können aber auch bei unserer Kollegin Frau Dr. Elke Riedel einen Termin vereinbaren.': { literal: 'Вы можете но также у нашей коллеги фрау др. Эльке Ридель приём назначить.', literary: 'Но вы также можете записаться на приём к нашей коллеге фрау доктор Эльке Ридель.' },
         'Sie erreichen Dr. Riedel in ihrer Praxis Ludwigstraße 78 Neuland und unter der Nummer 0208 69 69 99 18.': { literal: 'Вы достигаете др. Ридель в её практике Людвигштрассе 78 Нойланд и под номером 0208 69 69 99 18.', literary: 'Вы можете найти доктора Ридель в её практике на Людвигштрассе 78, Нойланд, и по номеру 0208 69 69 99 18.' },
+        // Fragment keys for regex split on abbreviations (Dr., 12.)
+        'Die Praxis von Dr.': { literal: 'Практика доктора', literary: 'Практика доктора' },
+        'Noak bleibt bis zum 12.': { literal: 'Ноак остаётся до 12-го', literary: 'Ноак закрыта до 12-го' },
+        'Mai wegen Krankheit geschlossen.': { literal: 'мая из-за болезни закрыта.', literary: 'мая по болезни.' },
+        'Sie können aber auch bei unserer Kollegin Frau Dr.': { literal: 'Вы можете но также у нашей коллеги фрау доктор', literary: 'Но вы также можете у нашей коллеги фрау доктор' },
+        'Elke Riedel einen Termin vereinbaren.': { literal: 'Эльке Ридель приём назначить.', literary: 'Эльке Ридель записаться на приём.' },
+        'Sie erreichen Dr.': { literal: 'Вы достигаете доктора', literary: 'Вы найдёте доктора' },
+        'Riedel in ihrer Praxis Ludwigstraße 78 Neuland und unter der Nummer 0208 69 69 99 18.': { literal: 'Ридель в её практике Людвигштрассе 78 Нойланд и под номером 0208 69 69 99 18.', literary: 'Ридель в её практике на Людвигштрассе 78, Нойланд, по номеру 0208 69 69 99 18.' },
       },
       vocabulary: [
         { de: 'die Praxis', plural: 'die Praxen', ru: 'практика, кабинет врача', gender: 'feminin', collocation: 'Praxis geschlossen', example: 'Die Praxis von Dr. Noak bleibt bis zum 12. Mai wegen Krankheit geschlossen.' },
