@@ -13,15 +13,20 @@ description: Создание source-файлов и генерация карт
 
 ## Что создаём per lesson (12 артефактов)
 
-### 8 source-файлов в `notebooklm/lesson_XX/`
+### 21 source-файл в `notebooklm/lesson_XX/`
 
-| Файл | Назначение | Генератор |
-|---|---|---|
-| `cards_teil_1.md` … `cards_teil_4.md` | Словарь для флеш-карточек (A2/B1, max 24 слов) | `tools/gen-cards.js` |
-| `quiz_t1_perevod.md` | Тест на перевод DE→RU (RU вопрос, RU ответы) | `tools/gen-quiz-ru-teil1.js` |
-| `quiz_t1_syn_ant_ru.md` | Синонимы/антонимы (RU вопрос, DE ответы) | то же |
-| `quiz_t1_kontext.md` | Hörverstehen (DE вопросы и ответы) | `tools/gen-quiz-de-teil1.js` |
-| `quiz_t1_kollok_ru.md` | Пропущенное слово в коллокации (RU вопрос, DE ответы) | `tools/gen-quiz-ru-teil1.js` |
+**Naming convention для upload в NotebookLM:** `lesson_XX_<filename>.md` (префикс `lesson_01_`, `lesson_02_` и т.д. для визуальной изоляции в Студии).
+
+| Файл (локально) | Upload title | Назначение | Генератор |
+|---|---|---|---|
+| `lesson-XX.md` | `lesson_XX_translation.md` | Полный перевод всех 12 текстов (DE / дословно / литературно) | `tools/gen-translation.js` |
+| `cards_teil_1..4.md` | `lesson_XX_cards_teil_N.md` | Словарь A2/B1 max 24 слов/Teil | `tools/gen-cards.js` |
+| `quiz_tN_perevod.md` × 4 | `lesson_XX_quiz_tN_perevod.md` | Перевод DE→RU (RU q, RU a) | `tools/gen-quiz-ru.js` |
+| `quiz_tN_syn_ant_ru.md` × 4 | `lesson_XX_quiz_tN_syn_ant_ru.md` | Синонимы/антонимы (RU q, DE a) | `tools/gen-quiz-ru.js` |
+| `quiz_tN_kontext.md` × 4 | `lesson_XX_quiz_tN_kontext.md` | Hörverstehen (DE q, DE a) | `tools/gen-quiz-de.js` |
+| `quiz_tN_kollok_ru.md` × 4 | `lesson_XX_quiz_tN_kollok_ru.md` | Пропущенное слово (RU q, DE a) | `tools/gen-quiz-ru.js` |
+
+**Всего 21 файл per lesson:** 1 translation + 4 cards + 16 quizzes (4 типа × 4 Teil).
 
 ### 8 studio-артефактов в NotebookLM
 
@@ -78,20 +83,26 @@ description: Создание source-файлов и генерация карт
 
 ## Генераторы
 
-### `tools/gen-cards.js` — A2/B1 фильтр + max 24 слов
+### Генераторы (все универсальные, принимают `lesson-XX` + `teil` где нужно)
 
 ```bash
-node tools/gen-cards.js lesson-01   # генерирует 4 cards_teil_N.md
-node tools/gen-cards.js lesson-02   # для нового урока
+# Одна команда генерит все 21 файл для урока:
+node tools/gen-translation.js lesson-02                    # 1 translation
+node tools/gen-cards.js lesson-02                          # 4 cards
+node tools/gen-quiz-ru.js lesson-02 1                      # 3 RU quizzes per Teil (× 4 Teil = 12)
+node tools/gen-quiz-ru.js lesson-02 2
+node tools/gen-quiz-ru.js lesson-02 3
+node tools/gen-quiz-ru.js lesson-02 4
+node tools/gen-quiz-de.js lesson-02 1                      # 1 DE Kontext quiz per Teil (× 4 = 4)
+node tools/gen-quiz-de.js lesson-02 2
+node tools/gen-quiz-de.js lesson-02 3
+node tools/gen-quiz-de.js lesson-02 4
 ```
 
-Содержит встроенный **A1_EXCLUDE set** (~200 базовых слов Goethe A1 Wortliste) — фильтрует из vocabulary все базовые слова типа: `der Mann, die Frau, das Kind, sprechen, gehen, schön, gut, warm, kalt` и т.д.
-
-Максимум 24 слова per Teil. Результат `capped.length` = реальное число карточек.
-
-### `tools/gen-quiz-ru-teil1.js` / `gen-quiz-de-teil1.js`
-
-Расширить на другие Teil при надобности (сейчас только Teil 1).
+**`gen-translation.js`** — выгружает все 12 текстов с переводами в одну .md таблицу.
+**`gen-cards.js`** — содержит A1_EXCLUDE set (~200 базовых слов Goethe A1), макс 24 слова per Teil.
+**`gen-quiz-ru.js`** — содержит SYN/ANT dict (курируется вручную per lesson как A2-teacher).
+**`gen-quiz-de.js`** — генерирует только Kontext (Hörverstehen) тесты на немецком.
 
 ---
 

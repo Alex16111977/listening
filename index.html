@@ -904,25 +904,33 @@ function renderExercisesView(lesson) {
       '<div class="ex-body" style="padding:12px 0;display:flex;flex-wrap:wrap;">' + fcLinks + '</div></details>';
   }
 
-  // Тесты (пока только Teil 1, 4 типа)
+  // Тесты (4 типа × 4 Teil)
   if (nlm.quizzes) {
     var qz = nlm.quizzes;
-    var qzItems = [
-      { key:'perevod_t1',  icon:'🔄', label:'Перевод лексики',    sub:'DE → RU' },
-      { key:'syn_ant_t1',  icon:'🤝', label:'Синонимы/Антонимы', sub:'вопрос RU, варианты DE' },
-      { key:'kontext_t1',  icon:'🎧', label:'Hörverstehen',       sub:'DE → DE' },
-      { key:'kollok_t1',   icon:'🔗', label:'Пропущенное слово',  sub:'коллокации' }
+    var qzTypes = [
+      { key:'perevod',  icon:'🔄', label:'Перевод лексики',    sub:'DE → RU' },
+      { key:'syn_ant',  icon:'🤝', label:'Синонимы/Антонимы',  sub:'RU → DE' },
+      { key:'kontext',  icon:'🎧', label:'Hörverstehen',       sub:'DE → DE' },
+      { key:'kollok',   icon:'🔗', label:'Пропущенное слово',  sub:'коллокации' }
     ];
-    var qzLinks = '';
-    qzItems.forEach(function(q) {
-      if (qz[q.key]) {
-        qzLinks += '<a class="nlm-card" href="' + qz[q.key] + '" target="_blank" rel="noopener">' + q.icon + ' ' + q.label + ' <span class="nlm-teil">(' + q.sub + ')</span></a>';
+    var teilLabels = { 1:'Kurze Texte', 2:'Gespräch', 3:'Kurze Gespräche', 4:'Interview' };
+    var totalTests = 0;
+    var qzAccordions = '';
+    [1,2,3,4].forEach(function(teilNum) {
+      var teilLinks = '';
+      qzTypes.forEach(function(t) {
+        var key = t.key + '_t' + teilNum;
+        if (qz[key]) {
+          totalTests++;
+          teilLinks += '<a class="nlm-card" href="' + qz[key] + '" target="_blank" rel="noopener">' + t.icon + ' ' + t.label + ' <span class="nlm-teil">(' + t.sub + ')</span></a>';
+        }
+      });
+      if (teilLinks) {
+        qzAccordions += '<details class="ex-accordion" id="ex-nlm-quizzes-t' + teilNum + '"><summary>📝 Teil ' + teilNum + ' — Тесты (NotebookLM) <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + teilLabels[teilNum] + ')</span></summary>' +
+          '<div class="ex-body" style="padding:12px 0;display:flex;flex-wrap:wrap;">' + teilLinks + '</div></details>';
       }
     });
-    if (qzLinks) {
-      html += '<details class="ex-accordion" open id="ex-nlm-quizzes"><summary>📝 Тесты (NotebookLM) <span style="color:var(--dim);font-weight:400;font-size:.76rem">(Teil 1)</span></summary>' +
-        '<div class="ex-body" style="padding:12px 0;display:flex;flex-wrap:wrap;">' + qzLinks + '</div></details>';
-    }
+    if (qzAccordions) html += qzAccordions;
   }
 
   // Аудиопересказ (если есть)
