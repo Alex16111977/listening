@@ -165,6 +165,15 @@ h1 span { color: var(--primary); }
 }
 .yt-link:hover { background: rgba(220,38,38,.12); border-color: rgba(220,38,38,.4); }
 .yt-link svg { width: 14px; height: 14px; fill: #dc2626; }
+.nlm-card {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: #7c3aed; font-size: .82rem; text-decoration: none; font-weight: 600;
+  background: rgba(124,58,237,.07); border: 1px solid rgba(124,58,237,.25);
+  padding: 8px 14px; border-radius: 10px; transition: all .2s;
+  margin: 4px 8px 4px 0;
+}
+.nlm-card:hover { background: rgba(124,58,237,.14); border-color: rgba(124,58,237,.5); transform: translateY(-1px); }
+.nlm-card .nlm-teil { color: var(--dim); font-weight: 400; font-size: .72rem; }
 .lcard-yt {
   display: inline-flex; align-items: center; gap: 3px;
   font-size: .62rem; color: #dc2626; font-weight: 600;
@@ -522,6 +531,7 @@ footer a:hover { color: var(--text); }
 <script src="lessons/lesson-32.js"></script>
 <script src="lessons/lesson-33.js"></script>
 <script src="lessons/lesson-34.js"></script>
+<script src="notebooklm-links.js"></script>
 
 <!-- ═══════════ APP LOGIC ═══════════ -->
 <script>
@@ -875,6 +885,66 @@ function renderExercisesView(lesson) {
     {n:3, label:'Kurze Gespräche'}, {n:4, label:'Interview'}
   ];
   var html = '<div style="padding:4px 0">';
+
+  // ─── NotebookLM артефакты (источник: notebooklm-links.js) ───
+  var nlm = (window.NLM_LINKS && window.NLM_LINKS[lesson.id]) || {};
+
+  // Флеш-карточки (4 набора по Teil)
+  if (nlm.flashcards) {
+    var fc = nlm.flashcards;
+    var fcLabels = { t1:'Kurze Texte', t2:'Gespräch', t3:'Kurze Gespräche', t4:'Interview' };
+    var fcLinks = '';
+    ['t1','t2','t3','t4'].forEach(function(k) {
+      if (fc[k]) {
+        var n = k.charAt(1);
+        fcLinks += '<a class="nlm-card" href="' + fc[k] + '" target="_blank" rel="noopener">🃏 Teil ' + n + ' <span class="nlm-teil">(' + fcLabels[k] + ')</span></a>';
+      }
+    });
+    html += '<details class="ex-accordion" open id="ex-nlm-cards"><summary>🃏 Флеш-карточки (NotebookLM) <span style="color:var(--dim);font-weight:400;font-size:.76rem">(4 набора по Teil)</span></summary>' +
+      '<div class="ex-body" style="padding:12px 0;display:flex;flex-wrap:wrap;">' + fcLinks + '</div></details>';
+  }
+
+  // Тесты (пока только Teil 1, 4 типа)
+  if (nlm.quizzes) {
+    var qz = nlm.quizzes;
+    var qzItems = [
+      { key:'perevod_t1',  icon:'🔄', label:'Перевод лексики',    sub:'DE → RU' },
+      { key:'syn_ant_t1',  icon:'🤝', label:'Синонимы/Антонимы', sub:'вопрос RU, варианты DE' },
+      { key:'kontext_t1',  icon:'🎧', label:'Hörverstehen',       sub:'DE → DE' },
+      { key:'kollok_t1',   icon:'🔗', label:'Пропущенное слово',  sub:'коллокации' }
+    ];
+    var qzLinks = '';
+    qzItems.forEach(function(q) {
+      if (qz[q.key]) {
+        qzLinks += '<a class="nlm-card" href="' + qz[q.key] + '" target="_blank" rel="noopener">' + q.icon + ' ' + q.label + ' <span class="nlm-teil">(' + q.sub + ')</span></a>';
+      }
+    });
+    if (qzLinks) {
+      html += '<details class="ex-accordion" open id="ex-nlm-quizzes"><summary>📝 Тесты (NotebookLM) <span style="color:var(--dim);font-weight:400;font-size:.76rem">(Teil 1)</span></summary>' +
+        '<div class="ex-body" style="padding:12px 0;display:flex;flex-wrap:wrap;">' + qzLinks + '</div></details>';
+    }
+  }
+
+  // Аудиопересказ (если есть)
+  if (nlm.audio) {
+    var audioItems = [
+      { key:'retell_t1', icon:'🎙', label:'Разбор Teil 1', sub:'урок A2' },
+      { key:'retell_t2', icon:'🎙', label:'Разбор Teil 2', sub:'урок A2' },
+      { key:'retell_t3', icon:'🎙', label:'Разбор Teil 3', sub:'урок A2' },
+      { key:'retell_t4', icon:'🎙', label:'Разбор Teil 4', sub:'урок A2' },
+      { key:'full',      icon:'🎧', label:'Полный пересказ', sub:'весь урок' }
+    ];
+    var audioLinks = '';
+    audioItems.forEach(function(a) {
+      if (nlm.audio[a.key]) {
+        audioLinks += '<a class="nlm-card" href="' + nlm.audio[a.key] + '" target="_blank" rel="noopener">' + a.icon + ' ' + a.label + ' <span class="nlm-teil">(' + a.sub + ')</span></a>';
+      }
+    });
+    if (audioLinks) {
+      html += '<details class="ex-accordion" id="ex-nlm-audio"><summary>🎙 Аудиопересказы (NotebookLM) <span style="color:var(--dim);font-weight:400;font-size:.76rem">(разбор с учителем)</span></summary>' +
+        '<div class="ex-body" style="padding:12px 0;display:flex;flex-wrap:wrap;">' + audioLinks + '</div></details>';
+    }
+  }
 
   // Викторина по словам (4 Teil)
   teilInfo.forEach(function(t) {
