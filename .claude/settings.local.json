@@ -53,7 +53,21 @@
       "Bash(node tools/gen-quiz-ru.js lesson-03 1)",
       "Bash(node tools/gen-quiz-ru.js lesson-03 2)",
       "mcp__chrome-devtools__list_pages",
-      "mcp__chrome-devtools__new_page"
+      "mcp__chrome-devtools__new_page",
+      "Bash(node tools/gen-quiz-ru.js lesson-04 1)",
+      "Bash(node tools/gen-translation.js lesson-04)",
+      "Bash(node tools/gen-cards.js lesson-04)",
+      "Bash(node tools/gen-quiz-ru.js lesson-04 2)",
+      "Bash(node tools/gen-quiz-ru.js lesson-04 3)",
+      "Bash(node tools/gen-quiz-ru.js lesson-04 4)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(done)",
+      "Bash(node tools/gen-translation.js lesson-06)",
+      "Bash(node tools/gen-cards.js lesson-06)",
+      "Bash(node tools/gen-quiz-ru.js lesson-06 1)",
+      "Bash(node tools/gen-quiz-ru.js lesson-06 2)",
+      "Bash(node tools/gen-quiz-ru.js lesson-06 3)"
     ]
   }
 }

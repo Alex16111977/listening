@@ -109,6 +109,71 @@ window.NLM_LINKS = {
     },
     audio: null,
     reports: null
+  },
+  'lesson-04': {
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=f9944c69-50b5-48ba-9f3f-859d53332aaf',
+      t2: 'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=770e8854-5ceb-4180-ae04-874c2b0d076c',
+      t3: 'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=09753f81-4067-4716-820b-1624b18e25af',
+      t4: 'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=ab8296cb-735b-4f49-aad4-fc33a30d58b4'
+    },
+    quizzes: {
+      // Teil 1
+      perevod_t1:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=5e7cf07f-95f7-4fa0-bcd0-a1e0da8ca919',
+      syn_ant_t1:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=5016f2dd-705a-487b-9c76-57beb358610e',
+      kontext_t1:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=2dda5959-fb70-4d78-bf5f-aff119b478c0',
+      kollok_t1:   'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=bea980c1-3091-4933-93f9-af408556785b',
+      // Teil 2
+      perevod_t2:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=9775291b-43e2-44a6-85de-e1c8ef5c744f',
+      syn_ant_t2:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=5b49688e-9e17-441f-bbf9-1a4a7161e52c',
+      kontext_t2:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=7958e1dc-8eed-45bf-a377-443500ecff6f',
+      kollok_t2:   'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=c7d3bc89-b6ff-47fe-8dc2-51fbedad2bfb',
+      // Teil 3
+      perevod_t3:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=d6d9a986-6beb-4c97-ba8e-e2d8c375c1d1',
+      syn_ant_t3:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=aeee3c94-5b3e-437a-8f43-f3cca17b14ee',
+      kontext_t3:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=e6e541ed-6fc7-4cb7-9ec9-b8b4d89f74fb',
+      kollok_t3:   'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=b69468da-3d5c-4631-bc96-92619d258dd9',
+      // Teil 4
+      perevod_t4:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=8d5c39f5-f784-44a2-8cef-f9d2a06a606e',
+      syn_ant_t4:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=889b2dc7-4c14-4f67-b438-1ee9f41dd91b',
+      kontext_t4:  'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=2ea2cd76-bc0e-42c1-abdc-aa1244871b8e',
+      kollok_t4:   'https://notebooklm.google.com/notebook/1f985d5d-ef57-4050-8c06-24111ba1564b?artifactId=a5b0472e-88eb-4c15-b2b5-104bcde52350'
+    },
+    audio: null,
+    reports: null
+  },
+  'lesson-06': {
+    // Notebook: HörenWeg 5-8 (f42e6a86-eea1-4e36-8e6a-e9b47db0d869)
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=c15e88d3-ae86-4744-af59-23307c049c56',
+      t2: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=efce2d84-8a00-42bd-864f-7fdf91eb83d4',
+      t3: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=d82be69b-80ae-4257-955f-5a70ea304120',
+      t4: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7943e354-f5cc-4734-9404-e809fe0d4056'
+    },
+    quizzes: {
+      // Teil 1
+      perevod_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=915b2230-55bd-469e-b2ff-fdce0880ba53',
+      syn_ant_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=418a21d8-cffe-462f-bb7f-a32e3a9a1015',
+      kontext_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=0b8660a6-b01d-4375-9e29-3ab43f548e21',
+      kollok_t1:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=2013805b-b1d1-47c9-adf3-9536ed60a4ef',
+      // Teil 2
+      perevod_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=556cd12d-850e-4288-b6b1-786e9cd39462',
+      syn_ant_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=efa927f1-654c-4f39-a83b-9cc253b61630',
+      kontext_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7bd5faa6-d616-412c-a2c3-9cf22944cec2',
+      kollok_t2:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7d5ab4ce-8a6d-441d-bf0d-34c4ab87b599',
+      // Teil 3
+      perevod_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=c4bacfe9-0ca2-4735-9c49-bdab6b3387b1',
+      syn_ant_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=3f240338-7e37-4cc8-9973-4c24396205de',
+      kontext_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=b1187ac2-d5f1-4841-af70-31a93e1be17e',
+      kollok_t3:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=1e9b8a9c-c4c0-455f-8bb1-2931c2f6993c',
+      // Teil 4
+      perevod_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=dc437e76-dceb-441d-bb71-d20eb5acbe29',
+      syn_ant_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=3e43e71c-6882-4bc0-a8ce-aafc1552a41a',
+      kontext_t4:  null,  // Суточный лимит NotebookLM исчерпан — создать завтра (лимит сбрасывается в 00:00)
+      kollok_t4:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7b43ae75-0289-47b7-8dc6-25a366b273ad'
+    },
+    audio: null,
+    reports: null
   }
   // ... (остальные уроки добавлять по мере генерации в NotebookLM)
 };
