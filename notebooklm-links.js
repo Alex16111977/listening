@@ -169,11 +169,193 @@ window.NLM_LINKS = {
       // Teil 4
       perevod_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=dc437e76-dceb-441d-bb71-d20eb5acbe29',
       syn_ant_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=3e43e71c-6882-4bc0-a8ce-aafc1552a41a',
-      kontext_t4:  null,  // Суточный лимит NotebookLM исчерпан — создать завтра (лимит сбрасывается в 00:00)
+      kontext_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=33692370-4f19-418a-9d61-7e0a1da52814',
       kollok_t4:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7b43ae75-0289-47b7-8dc6-25a366b273ad'
     },
     audio: null,
     reports: null
+  },
+  'lesson-05': {
+    // Notebook: HörenWeg 5-8 (f42e6a86-eea1-4e36-8e6a-e9b47db0d869)
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=f41c92e1-bf0b-407a-97da-1015548070c0',
+      t2: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=4257ccc7-e62b-4f9e-96e4-eabce1ea1d75',
+      t3: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=a4aba6b0-7d4e-4d4e-960a-8a848c42b5b3',
+      t4: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=810782e2-e7e2-4159-9bc8-824a0494ee49'
+    },
+    quizzes: {
+      perevod_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=981af9ba-7389-4e36-8876-7dae47bbc9dc',
+      syn_ant_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=0bb03fd0-d440-486a-8e9a-b35d52ee4e9b',
+      kontext_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=95ae23ed-dc7b-49aa-ab88-f2a9d4922fc2',
+      kollok_t1:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=164ad382-12b0-4f38-91e2-a3ce97907131',
+      perevod_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=f727e836-b139-466b-b36f-47070b27ebcc',
+      syn_ant_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=5700a5a7-018c-4dd8-b4ce-7cb1de5c5114',
+      kontext_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7b5f199b-fec9-4bfb-9c06-6244fdcd221e',
+      kollok_t2:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=d1732b81-20ad-4113-84c6-782122b51d53',
+      perevod_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=33be5369-e7fc-4603-8622-eaae724425e8',
+      syn_ant_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=ae7854d1-1449-4ca4-b664-3bd29d115391',
+      kontext_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=6b6d62a9-9163-49ae-814c-4cc8f2b7aeba',
+      kollok_t3:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=53922486-c451-40f7-be79-2e560c65b654',
+      perevod_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=ab272b59-e90b-4c2e-9ad1-3ac6cbd59536',
+      syn_ant_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=1c9f2621-990e-4f15-94ee-7e218c800c8a',
+      kontext_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=318f8873-f90b-442c-ba68-d0c342f306e6',
+      kollok_t4:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=507cd2e0-1f33-494c-816e-9b8ded1dc478'
+    },
+    audio: null,
+    reports: null
+  },
+  'lesson-07': {
+    // Notebook: HörenWeg 5-8 — SPECIAL CASE: only Teil 1 (5 texts)
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=7f832703-38c3-4248-a142-7381bfd71bd6',
+      t2: null, t3: null, t4: null
+    },
+    quizzes: {
+      perevod_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=64283c09-d13a-4594-afd6-0544f34fd71a',
+      syn_ant_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=cc02d636-6620-46a8-8fac-b455d54a27a9',
+      kontext_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=be779109-6454-4677-8e2d-cc0df5908a0f',
+      kollok_t1:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=ebfa27b0-822d-48d3-b604-8e24b202340f'
+    },
+    audio: null,
+    reports: null
+  },
+  'lesson-08': {
+    // Notebook: HörenWeg 5-8 (f42e6a86-eea1-4e36-8e6a-e9b47db0d869)
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=0b69bb9b-1aed-4d6c-b995-32ae270ba416',
+      t2: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=abfd1ee2-eece-413c-940c-00b272e3412e',
+      t3: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=8b6610cb-ce96-403d-a7a0-faca84cb9a2c',
+      t4: 'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=a485eee0-4229-4d50-b536-5d3aff3689a2'
+    },
+    quizzes: {
+      perevod_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=26c6f76a-c868-4bd8-ace7-f999b4e391e3',
+      syn_ant_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=0e8b1ea6-a3f1-4f48-89fd-542155e06495',
+      kontext_t1:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=b6f63b8e-26da-487d-9521-11cfd3a62e17',
+      kollok_t1:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=4dd8e06f-0f8e-484a-b253-a47b3ec18d8a',
+      perevod_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=1d4458ca-a3fd-42b9-9278-694698d3d9c8',
+      syn_ant_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=76d873b6-fd57-42d6-9957-42921e556d02',
+      kontext_t2:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=a038aa49-030c-497f-9d1d-5a3d1fe2aac3',
+      kollok_t2:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=c658a029-527a-4df6-8763-c86b6dbad65d',
+      perevod_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=bc9ee499-1df6-41b1-86be-921ccc692e42',
+      syn_ant_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=20997b1e-4247-43f5-9e2e-62a1da410047',
+      kontext_t3:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=6c4a685b-38a6-49be-a391-34be8e3656f1',
+      kollok_t3:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=e0784e31-6c2c-4717-8a31-fa700301fcb7',
+      perevod_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=ad53eb89-2e9d-4284-8825-9737cf7374e0',
+      syn_ant_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=23ab945d-034b-4ef9-9cb4-552ada610ec1',
+      kontext_t4:  'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=21daf286-7c8a-41b9-a292-0d0cdb704ba6',
+      kollok_t4:   'https://notebooklm.google.com/notebook/f42e6a86-eea1-4e36-8e6a-e9b47db0d869?artifactId=6d606560-4e05-4c5c-9d68-892d71447cb9'
+    },
+    audio: null,
+    reports: null
+  },
+  'lesson-09': {
+    // Notebook: HörenWeg 9-12 (78f91e90-1f4e-46fe-b83d-1f3d26d8db3d)
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=84dd9f92-0665-4c27-b0d7-a4082af11709',
+      t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=2efc6f20-98be-4db6-806b-00d27f5c7ffb',
+      t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=4047f871-7bb6-4c87-8b6a-bc9befe0e6f6',
+      t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=39ab8687-d359-4a25-a28c-be876de808e0'
+    },
+    quizzes: {
+      perevod_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=d327435d-fb1b-42d8-9cc7-2234d7774a94',
+      syn_ant_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=c880050e-8fae-48a8-86c1-1b06ba7d7461',
+      kontext_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=db44debf-f552-4738-b04d-615b9fd0996f',
+      kollok_t1:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=9d482c1b-ea22-47e1-9f42-cc377be8044f',
+      perevod_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=9680dfaf-808c-4b2b-a2f6-932db4b8e8b3',
+      syn_ant_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=bafed01e-9ab6-4a75-b415-7ee6293ec2d9',
+      kontext_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=12da50d8-74b1-46b6-ad00-16eb1546cc53',
+      kollok_t2:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=2cfa7561-b4f6-41c1-9d78-fede3732aa6f',
+      perevod_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=56425c51-4f92-4db6-9879-140f548a6f29',
+      syn_ant_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=2c7eb9f8-d6ba-43f5-847d-0b3a411d8c51',
+      kontext_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=373f59eb-4fb8-43cc-abc3-d318a4314a97',
+      kollok_t3:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=f89ebb79-e613-459c-9cec-3990b4af528d',
+      perevod_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=498fcaef-7cc5-43b9-bc3d-664d385cee4c',
+      syn_ant_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=ef4fcb1a-6a08-4332-8b1f-0a30994e0bd8',
+      kontext_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=ca7900f6-d509-407a-86aa-845a20c34474',
+      kollok_t4:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=80a9f791-d0ca-4237-86ce-26f827d3517f'
+    },
+    audio: null, reports: null
+  },
+  'lesson-10': {
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=c56d024b-74e3-40f2-a12c-c3ac80c01018',
+      t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=50a31939-4aff-4df4-a563-fc8e5437d028',
+      t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=d5cd49dd-f821-46ab-885c-8859231bc9f3',
+      t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=7ccfee8f-0562-4571-a41f-01d54eb85143'
+    },
+    quizzes: {
+      perevod_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=3e4f565c-2238-4560-9440-9e79a6e37ef9',
+      syn_ant_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=82f66e43-6670-40dd-a130-ea3eefd6264c',
+      kontext_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=89a4ab85-d01f-4ccb-897e-bb86c8ec37c6',
+      kollok_t1:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=a3465119-a758-4847-933f-8b146147c1e6',
+      perevod_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=8af60956-0a03-4d4d-8978-b79e29e79f20',
+      syn_ant_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=1269f9e6-c899-4bc8-8a68-ddadb7d518be',
+      kontext_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=484325b1-c574-47de-b33a-9900141f2412',
+      kollok_t2:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=483d8fd2-740f-44d5-9714-b552f74a09cc',
+      perevod_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=6633b841-eb03-4673-9937-37df84afcd53',
+      syn_ant_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=97cd0cc3-bf73-4f60-b8dc-d9ba147cdf16',
+      kontext_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=c92b2617-80eb-430f-b0ce-3ade73a9b2a1',
+      kollok_t3:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=3409ecb2-2fac-44c4-992d-2bf411d08151',
+      perevod_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=0a143c4c-798f-41a2-9498-081ccc60d986',
+      syn_ant_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=3f3b768e-36c8-4475-8a6c-d39a05946f3f',
+      kontext_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=537616f4-e419-4fb7-830f-655eed3c4fbd',
+      kollok_t4:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=fbfdcccb-3042-45ce-bb73-8e17c0120155'
+    },
+    audio: null, reports: null
+  },
+  'lesson-11': {
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=9e0bdca2-fa3c-421f-9af3-b0346bbc1f4e',
+      t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=89a4b1ae-f01d-45e3-9404-0aee356779f5',
+      t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=6680d020-966b-4b89-bae9-730a24e0fe59',
+      t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=db9ba78e-3bed-49cf-a05c-5bbc25a4572e'
+    },
+    quizzes: {
+      perevod_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=72452f83-b699-4f09-9e29-54451320d2c6',
+      syn_ant_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=966eda40-9b61-44a3-8e09-eff1b3824d84',
+      kontext_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=fe5785f7-2a58-494c-a5c7-3b151a131db3',
+      kollok_t1:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=3935025a-84fc-4638-ad44-82d587a8a72d',
+      perevod_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=15876d83-c62c-4bd7-bc9c-62612b756e4c',
+      syn_ant_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=15ed2c4c-3510-4e1c-aa0e-4625df98a387',
+      kontext_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=9eecb991-5a6b-40ab-8ac8-a419b53c329c',
+      kollok_t2:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=193d6606-b8c0-46e7-9d40-ba3bdc864edc',
+      perevod_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=5b1562de-bd04-45c1-8777-f25638143b05',
+      syn_ant_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=9566cdaa-5340-4286-befe-118e396d2e77',
+      kontext_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=831c7916-d6d4-4434-9d7f-64c78c160e70',
+      kollok_t3:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=f56af71b-3bea-4f75-8405-1e04b65187aa',
+      perevod_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=794490bb-1b1f-43cd-a602-62afe856d941',
+      syn_ant_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=54b3e92f-7475-4e00-b22c-67f1011d7e31',
+      kontext_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=1c70e315-89c4-4b0a-8716-f5b2a6677661',
+      kollok_t4:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=bc2f5c1c-57ae-4241-a81d-c9c174f5b68f'
+    },
+    audio: null, reports: null
+  },
+  'lesson-12': {
+    flashcards: {
+      t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=5113cfa1-3871-46f7-bf0b-766fda6ef573',
+      t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=06421cd4-ed40-4138-8990-4cb413b8eb8b',
+      t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=e1e51500-e3c5-4662-adbf-765c270bf537',
+      t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=1973673e-3d37-4877-be3d-be0f70c19422'
+    },
+    quizzes: {
+      perevod_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=45e9e34d-a2e0-4948-9e1a-9726cbe02ff8',
+      syn_ant_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=96962cb9-fae0-4522-9b18-e006f913fb0f',
+      kontext_t1: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=9b87508a-295d-443c-ab89-9f0f1ed86dba',
+      kollok_t1:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=3b0c1bc8-b5db-4d62-b7e2-8eb8592a5ced',
+      perevod_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=658014b1-3109-4760-ab3a-fa7ed7fa2421',
+      syn_ant_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=e5a68ef4-4303-4208-a269-0959a2010628',
+      kontext_t2: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=3efaeb38-c759-4d68-a4e4-fce059d42609',
+      kollok_t2:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=fc40e158-4222-406c-bbbc-76c38c745869',
+      perevod_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=ab7cd9c4-2156-4cf9-833e-4089a91d99a0',
+      syn_ant_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=f00b7cd8-4175-4e0f-b753-abdf27e9af61',
+      kontext_t3: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=4a1f4f27-edbf-4caf-bf20-4e54e8b549fb',
+      kollok_t3:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=763d4e0b-42ba-4b50-8fee-7227058c1329',
+      perevod_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=0b0ca31b-9492-462b-8d23-c20f58157efe',
+      syn_ant_t4: 'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=09dfae8b-8766-43f4-809d-d8366c87a0ba',
+      kontext_t4: null,  // Суточный лимит — создать завтра
+      kollok_t4:  'https://notebooklm.google.com/notebook/78f91e90-1f4e-46fe-b83d-1f3d26d8db3d?artifactId=0760f14d-9261-40cb-8377-021a85b3d85e'
+    },
+    audio: null, reports: null
   }
   // ... (остальные уроки добавлять по мере генерации в NotebookLM)
 };
