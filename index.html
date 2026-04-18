@@ -150,9 +150,57 @@ body {
   background: var(--teal);
   display: inline-block; margin-right: 6px; vertical-align: middle;
 }
+/* Hamburger (mobile only) */
+.hw-hamburger {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--ink);
+  width: 36px; height: 36px;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  border-radius: 0;
+}
+.hw-hamburger span,
+.hw-hamburger span::before,
+.hw-hamburger span::after {
+  position: absolute;
+  display: block;
+  height: 1.5px; width: 18px;
+  background: var(--ink);
+  left: 50%; transform: translateX(-50%);
+  transition: all .2s;
+}
+.hw-hamburger span { top: 50%; margin-top: -0.75px; }
+.hw-hamburger span::before { content: ''; top: -6px; }
+.hw-hamburger span::after  { content: ''; top: 6px; }
+.hw-hamburger.open span { background: transparent; }
+.hw-hamburger.open span::before { top: 0; transform: translateX(-50%) rotate(45deg); }
+.hw-hamburger.open span::after  { top: 0; transform: translateX(-50%) rotate(-45deg); }
+
 @media (max-width: 900px) {
-  .hw-topbar__inner { grid-template-columns: auto auto; padding: 12px 24px; gap: 16px; }
-  .hw-topbar__nav { display: none; }
+  .hw-topbar__inner { grid-template-columns: auto auto auto; padding: 12px 24px; gap: 16px; }
+  .hw-hamburger { display: block; order: 3; }
+  .hw-topbar__right { display: none; }
+  .hw-topbar__nav {
+    position: fixed; top: 60px; left: 0; right: 0;
+    display: none; flex-direction: column; gap: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--ink);
+    padding: 16px 24px 24px;
+    z-index: 49;
+    animation: fadeInUp .2s;
+  }
+  .hw-topbar__nav.open { display: flex; }
+  .hw-topbar__nav a {
+    font-family: var(--serif); font-size: 18px; font-weight: 500;
+    color: var(--ink); padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    text-transform: none; letter-spacing: 0;
+  }
+  .hw-topbar__nav a:last-child { border-bottom: none; }
+  .hw-topbar__nav a.active { color: var(--carmine); }
+  .hw-topbar__nav a.active::after { display: none; }
 }
 
 /* ═══════════ HERO ═══════════ */
@@ -370,6 +418,111 @@ body {
   .hw-lessons__header > *:nth-child(n+4), .hw-lesson-row > *:nth-child(n+4) { display: none; }
 }
 
+/* ═══════════ FEATURED LESSON ═══════════ */
+.hw-featured {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 64px 48px;
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  gap: 40px;
+  max-width: var(--col);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--ink);
+}
+.hw-featured__left {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-5);
+}
+.hw-featured__left strong {
+  color: var(--paper); display: block;
+  font-family: var(--serif); font-weight: 900; font-size: 28px;
+  letter-spacing: -0.02em; margin-top: 10px;
+  text-transform: none;
+}
+.hw-featured__left em { font-style: italic; font-weight: 400; color: var(--carmine-wash); }
+.hw-featured__left .blurb {
+  margin-top: 20px;
+  font-family: var(--serif); font-size: 14px; font-style: italic;
+  line-height: 1.5; color: var(--paper-3);
+  text-transform: none; letter-spacing: 0;
+}
+.hw-featured__left .meta {
+  margin-top: 20px; padding-top: 14px;
+  border-top: 1px solid var(--ink-3);
+}
+.hw-featured__mid h3 {
+  font-family: var(--serif);
+  font-weight: 400; font-size: 44px;
+  letter-spacing: -0.02em; line-height: 1.1;
+  margin-bottom: 24px;
+  color: var(--paper);
+}
+.hw-featured__mid h3 em { font-style: italic; color: var(--carmine-wash); }
+.hw-featured__mid .transcript {
+  font-family: var(--serif);
+  font-size: 17px; line-height: 1.6;
+  color: var(--paper-3);
+}
+.hw-featured__mid .transcript p { margin-bottom: 10px; }
+.hw-featured__mid .transcript mark {
+  background: transparent;
+  color: var(--paper);
+  border-bottom: 1px solid var(--carmine);
+  padding-bottom: 2px;
+}
+.hw-featured__mid .num-badge {
+  display: inline-block; width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--carmine);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 11px; text-align: center;
+  line-height: 22px;
+  margin-right: 8px; vertical-align: middle;
+}
+.hw-featured__right {
+  display: flex; flex-direction: column; gap: 10px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-5);
+}
+.hw-featured__right h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--paper);
+  margin-bottom: 4px; font-weight: 500;
+}
+.hw-featured__right .vocab-pill {
+  background: transparent;
+  border: 1px solid var(--ink-3);
+  padding: 10px 14px;
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--paper);
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.hw-featured__right .vocab-pill span {
+  font-family: var(--sans);
+  font-size: 11px; color: var(--ink-5);
+}
+.hw-featured__right .open-link {
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ink-3);
+  font-family: var(--mono);
+  font-size: 10px; color: var(--carmine-wash);
+  text-transform: uppercase; letter-spacing: 0.14em;
+  text-decoration: none; transition: color .15s;
+}
+.hw-featured__right .open-link:hover { color: var(--paper); }
+@media (max-width: 900px) {
+  .hw-featured { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; }
+}
+
 /* ═══════════ METHODS ═══════════ */
 .hw-methods {
   display: grid;
@@ -493,45 +646,89 @@ h1 span { font-style: italic; font-weight: 400; color: var(--carmine); }
 .lcard:hover { border-color: var(--carmine); }
 
 /* ═══════════ LESSON DETAIL VIEW ═══════════ */
-#detail { display: none; padding-top: 40px; padding-bottom: 80px; }
+#detail { display: none; padding-top: 0; padding-bottom: 80px; }
 .back-btn {
   display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--mono); font-size: 11px; font-weight: 500;
   color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.14em;
   text-decoration: none; cursor: pointer;
   background: none; border: none; padding: 0;
+  margin: 28px 0 0;
 }
 .back-btn:hover { color: var(--carmine); }
 
+/* Decorative hero bar for lesson detail */
 .detail-head {
   display: grid;
-  grid-template-columns: 100px 1fr auto;
-  gap: 28px;
-  align-items: baseline;
-  padding: 24px 0 28px;
+  grid-template-columns: minmax(180px, 240px) 1fr auto;
+  gap: 40px;
+  align-items: end;
+  padding: 48px 0 36px;
   border-bottom: 1px solid var(--ink);
-  margin-bottom: 32px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.detail-head::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--rule);
 }
 .detail-num {
   width: auto; height: auto;
-  background: none; color: var(--ink-4);
-  font-family: var(--mono); font-size: 14px; font-weight: 500;
-  letter-spacing: 0.06em;
+  background: none; color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(72px, 11vw, 140px);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
   display: block;
   border-radius: 0;
+  position: relative;
 }
-.detail-num::before { content: 'L·'; color: var(--carmine); }
+.detail-num::before {
+  content: 'L·';
+  color: var(--carmine);
+  font-style: italic;
+  font-weight: 400;
+}
+.detail-body {
+  display: flex; flex-direction: column;
+  gap: 14px;
+  padding-bottom: 8px;
+}
 .detail-title {
   font-family: var(--serif);
-  font-size: 40px; font-weight: 400;
-  letter-spacing: -0.02em; line-height: 1.08;
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 400;
+  letter-spacing: -0.02em; line-height: 1.05;
   color: var(--ink);
+}
+.detail-title em { font-style: italic; color: var(--carmine); }
+.detail-teile {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--ink-3); line-height: 1.4;
+}
+.detail-teile .teil-item {
+  display: inline-flex; align-items: baseline; gap: 8px;
+}
+.detail-teile .teil-item::before {
+  content: attr(data-n);
+  font-family: var(--mono); font-size: 10px; font-style: normal;
+  color: var(--carmine); letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 500;
+  align-self: center;
 }
 .detail-meta {
   font-family: var(--mono);
   font-size: 10px; color: var(--ink-4);
   text-transform: uppercase; letter-spacing: 0.14em;
-  margin-top: 8px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 4px;
+}
+.detail-meta > span { display: inline-flex; }
+.detail-meta > span + span::before {
+  content: '·'; margin-right: 14px; color: var(--rule-2);
 }
 .detail-link {
   margin-left: auto; flex-shrink: 0;
@@ -732,8 +929,8 @@ h1 span { font-style: italic; font-weight: 400; color: var(--carmine); }
 .nav-btn:disabled:hover { color: var(--ink-5); }
 
 @media (max-width: 900px) {
-  .detail-head { grid-template-columns: 1fr; gap: 12px; }
-  .detail-title { font-size: 28px; }
+  .detail-head { grid-template-columns: 1fr; gap: 18px; padding: 32px 0 24px; align-items: start; }
+  .detail-num { font-size: 72px; line-height: 0.9; }
   .yt-link, .detail-link { align-self: start; }
 }
 
@@ -1066,13 +1263,14 @@ body > footer a:hover { color: var(--text); }
   <div class="hw-topbar__inner">
     <a href="#" class="wordmark" onclick="goHome();return false;">Hören<em>Weg</em></a>
     <nav class="hw-topbar__nav" id="hw-nav">
-      <a href="#" class="active" onclick="goHome();return false;">Уроки</a>
-      <a href="#hw-methods">Методики</a>
-      <a href="#hw-about">О проекте</a>
+      <a href="#" class="active" onclick="goHome();closeNav();return false;">Уроки</a>
+      <a href="#hw-methods" onclick="closeNav()">Методики</a>
+      <a href="#hw-about" onclick="closeNav()">О проекте</a>
     </nav>
     <div class="hw-topbar__right">
       <span><span class="dot"></span><span id="hw-lesson-count">34</span> уроков</span>
     </div>
+    <button class="hw-hamburger" id="hw-hamburger" aria-label="Меню" onclick="toggleNav()"><span></span></button>
   </div>
 </header>
 
@@ -1150,6 +1348,25 @@ body > footer a:hover { color: var(--text); }
           <div></div>
         </div>
         <div id="lesson-grid"></div>
+      </div>
+    </section>
+
+    <!-- FEATURED LESSON (populated by renderFeatured from LESSONS[0]) -->
+    <section class="hw-featured" id="hw-featured" style="display:none">
+      <div class="hw-featured__left">
+        Рекомендуемый урок
+        <strong><span id="hw-feat-kicker">Lektion 01</span></strong>
+        <div class="blurb" id="hw-feat-blurb">—</div>
+        <div class="meta" id="hw-feat-meta">—</div>
+      </div>
+      <div class="hw-featured__mid">
+        <h3 id="hw-feat-title">—</h3>
+        <div class="transcript" id="hw-feat-transcript">—</div>
+      </div>
+      <div class="hw-featured__right">
+        <h4>Ключевая лексика</h4>
+        <div id="hw-feat-vocab"></div>
+        <a class="open-link" id="hw-feat-link" href="#lesson-01">Открыть полную транскрипцию →</a>
       </div>
     </section>
 
@@ -1350,6 +1567,7 @@ function renderGrid() {
   });
   document.getElementById('lesson-grid').innerHTML = html;
   updateHeroStats();
+  renderFeatured();
 }
 
 // Derive a short "subtitle" for the row: strip common prefix "Dieser Prüfungsteil..."
@@ -1409,6 +1627,68 @@ function renderLessonRow(l) {
   '</a>';
 }
 
+// Render featured lesson teaser from LESSONS[0] (Lektion 01).
+function renderFeatured() {
+  if (!LESSONS.length) return;
+  var l = LESSONS[0];
+  var firstText = l.texts && l.texts[0];
+  if (!firstText) return;
+  var feat = document.getElementById('hw-featured');
+  if (!feat) return;
+
+  // Kicker + blurb
+  var kicker = 'Lektion ' + String(l.number).padStart(2,'0');
+  var blurb = firstText.name && firstText.type
+    ? firstText.type.charAt(0).toUpperCase() + firstText.type.slice(1) + ' — ' + firstText.name + '.'
+    : esc(l.title);
+  var teilName = firstText.teil ? 'Teil ' + firstText.teil + ' · Aufgabe ' + (firstText.aufgabe || 1) : '';
+  var meta = (teilName ? teilName + '<br>' : '') +
+    'Type: ' + (firstText.type || '—') + '<br>' +
+    'Hörtexte: ' + (l.texts.length || 0);
+
+  // Pick a "headline" sentence from text (prefer the most substantive — longest with a comma)
+  var headline = firstText.text || '';
+  var sentences = headline.split(/(?<=[.!?])\s+/);
+  var chosen = sentences.find(function(s){ return s.length > 40 && s.length < 150 && /,/.test(s); }) || sentences[1] || sentences[0] || headline;
+
+  // Transcript: first 4 sentences with mark on key vocabulary words
+  var vocabWords = (firstText.vocabulary || []).slice(0, 6).map(function(v){
+    var w = (v.de || '').replace(/^(der|die|das)\s+/, '').replace(/\W/g,'');
+    return w;
+  }).filter(function(w){ return w.length > 3; });
+
+  function markKeyWords(s) {
+    var out = esc(s);
+    vocabWords.forEach(function(w) {
+      if (!w) return;
+      var re = new RegExp('\\b(' + w.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,'\\$1') + '[a-zäöüß]*)\\b', 'i');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+
+  var transcriptHtml = '';
+  sentences.slice(0, 4).forEach(function(s, i) {
+    if (!s.trim()) return;
+    transcriptHtml += '<p><span class="num-badge">' + (i + 1) + '</span>' + markKeyWords(s) + '</p>';
+  });
+
+  // Vocab pills — 5 items
+  var vocabSrc = (firstText.vocabulary || l.vocabulary || []).slice(0, 5);
+  var vocabHtml = vocabSrc.map(function(v) {
+    return '<div class="vocab-pill">' + esc(v.de) + '<span>' + esc(v.ru) + '</span></div>';
+  }).join('');
+
+  document.getElementById('hw-feat-kicker').textContent = kicker;
+  document.getElementById('hw-feat-blurb').textContent = blurb;
+  document.getElementById('hw-feat-meta').innerHTML = meta;
+  document.getElementById('hw-feat-title').innerHTML = markKeyWords(chosen);
+  document.getElementById('hw-feat-transcript').innerHTML = transcriptHtml;
+  document.getElementById('hw-feat-vocab').innerHTML = vocabHtml;
+  document.getElementById('hw-feat-link').href = '#' + l.id;
+  feat.style.display = '';
+}
+
 // Populate hero stats (lesson count, text count, prompt count).
 function updateHeroStats() {
   var totalTexts = LESSONS.reduce(function(a, l){ return a + (l.texts ? l.texts.length : 0); }, 0);
@@ -1427,12 +1707,27 @@ function renderDetail(lesson, activeTab) {
   activeTab = activeTab || PROMPT_TYPES[0].id;
   var textsCount = lesson.texts ? lesson.texts.length : 0;
 
-  // Header
+  // Header — decorative hero bar with big L·XX + italic Teil names
   var ytSvg = '<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>';
+  // Italicize the common pattern "Goethe A2 Hören —" by wrapping the bit AFTER the dash in <em>.
+  var titleHtml = esc(lesson.title).replace(/ — (.+)$/, ' — <em>$1</em>');
+  // Teile list
+  var teilNames = {1: 'Kurze Texte', 2: 'Gespräch', 3: 'Kurze Gespräche', 4: 'Interview'};
+  var teileActive = teileOn(lesson);
+  var teileHtml = [1,2,3,4].filter(function(k){ return teileActive[k]; }).map(function(k){
+    return '<span class="teil-item" data-n="Teil ' + k + '">' + teilNames[k] + '</span>';
+  }).join('<span style="color:var(--rule-2)">·</span>');
   document.getElementById('detail-head').innerHTML =
     '<div class="detail-num">' + String(lesson.number).padStart(2,'0') + '</div>' +
-    '<div><div class="detail-title">' + esc(lesson.title) + '</div>' +
-    '<div class="detail-meta">' + esc(lesson.source || 'Goethe-Institut') + ' · ' + lesson.level + ' · ' + textsCount + ' мини-текстов</div></div>' +
+    '<div class="detail-body">' +
+      '<div class="detail-title">' + titleHtml + '</div>' +
+      '<div class="detail-teile">' + teileHtml + '</div>' +
+      '<div class="detail-meta">' +
+        '<span>' + esc(lesson.source || 'Goethe-Institut') + '</span>' +
+        '<span>' + lesson.level + '</span>' +
+        '<span>' + textsCount + ' Mini-Texte</span>' +
+      '</div>' +
+    '</div>' +
     (lesson.videoUrl ? '<a class="yt-link" href="' + lesson.videoUrl + '" target="_blank">' + ytSvg + ' YouTube</a>' : '');
 
   // Tabs
@@ -1631,6 +1926,21 @@ function route() {
 }
 
 function goHome() { location.hash = ''; }
+
+// ─── MOBILE NAV ───
+function toggleNav() {
+  var nav = document.getElementById('hw-nav');
+  var burger = document.getElementById('hw-hamburger');
+  if (!nav || !burger) return;
+  nav.classList.toggle('open');
+  burger.classList.toggle('open');
+}
+function closeNav() {
+  var nav = document.getElementById('hw-nav');
+  var burger = document.getElementById('hw-hamburger');
+  if (nav) nav.classList.remove('open');
+  if (burger) burger.classList.remove('open');
+}
 
 function switchTab(lessonId, tabId) {
   location.hash = lessonId + '/' + tabId;
