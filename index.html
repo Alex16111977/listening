@@ -1525,6 +1525,19 @@ function fillPromptTeil(lesson, teil, promptText) {
     );
 }
 
+// ─── FIND PROMPT WITH FALLBACK TO LESSON 01 TEMPLATE ───
+// If the current lesson doesn't have a prompt for this key, fall back to the
+// Lesson 01 template — prompts are written against placeholders ({lessonText},
+// {vocabularyList}, …) so the same template works for any lesson.
+function findPromptOrTemplate(lesson, promptKey) {
+  if (lesson.prompts && lesson.prompts[promptKey] && lesson.prompts[promptKey].promptText) {
+    return { prompt: lesson.prompts[promptKey], fromTemplate: false };
+  }
+  var tpl = LESSONS[0] && LESSONS[0].prompts && LESSONS[0].prompts[promptKey];
+  if (tpl && tpl.promptText) return { prompt: tpl, fromTemplate: true };
+  return null;
+}
+
 // ─── RENDER PROMPTS BY TEIL (4 accordions) ───
 function renderPromptsByTeil(lesson, promptId) {
   var teilInfo = [
@@ -1533,15 +1546,22 @@ function renderPromptsByTeil(lesson, promptId) {
   ];
   var pt = PROMPT_TYPES.find(function(p){ return p.id === promptId; });
   var html = '<div style="padding:4px 0">';
+  var anyRendered = false;
   teilInfo.forEach(function(t) {
     var promptKey = promptId + '_t' + t.n;
-    var prompt = lesson.prompts[promptKey];
-    if (!prompt || !prompt.promptText) return;
+    var res = findPromptOrTemplate(lesson, promptKey);
+    if (!res) return;
+    var prompt = res.prompt;
     var filled = fillPromptTeil(lesson, t.n, prompt.promptText);
     var pid = 'prompt-' + lesson.id + '-' + promptKey;
+    var templateBadge = res.fromTemplate
+      ? ' <span style="font-family:var(--mono);font-size:10px;color:var(--ochre);margin-left:8px;text-transform:uppercase;letter-spacing:0.12em">▲ шаблон Lesson 01</span>'
+      : '';
+    anyRendered = true;
     html += '<details class="ex-accordion"><summary>' +
       pt.icon + ' Teil ' + t.n + ' — ' + pt.title +
-      ' <span style="color:var(--dim);font-weight:400;font-size:.76rem">(' + t.label + ')</span>' +
+      ' <span style="color:var(--ink-5);font-weight:400;font-family:var(--sans);font-size:11px;letter-spacing:0;text-transform:none">(' + t.label + ')</span>' +
+      templateBadge +
     '</summary><div class="ex-body">' +
       '<div class="prompt-card" style="border:none">' +
         (prompt.instruction ? '<div class="prompt-instr">' + esc(prompt.instruction) + '</div>' : '') +
@@ -1552,6 +1572,12 @@ function renderPromptsByTeil(lesson, promptId) {
       '</div>' +
     '</div></details>';
   });
+  if (!anyRendered) {
+    html += '<div class="prompt-card"><div class="prompt-instr">' +
+      'Промт для «' + pt.title + '» ещё не создан — ни для этого урока, ни в шаблоне Lesson 01. ' +
+      'Попробуйте открыть <a href="#' + LESSONS[0].id + '/' + promptId + '" style="color:var(--carmine)">Lektion 01</a>.' +
+    '</div></div>';
+  }
   html += '</div>';
   return html;
 }
@@ -1756,15 +1782,22 @@ function renderDetail(lesson, activeTab) {
       panelsHtml += renderPromptsByTeil(lesson, pt.id);
     } else {
       // Single prompt (e.g. grammar)
-      var prompt = lesson.prompts[pt.id];
-      if (!prompt) {
-        panelsHtml += '<div class="prompt-card"><div class="prompt-instr">Промт для этого типа пока не создан.</div></div>';
+      var res = findPromptOrTemplate(lesson, pt.id);
+      if (!res) {
+        panelsHtml += '<div class="prompt-card"><div class="prompt-instr">' +
+          'Промт «' + pt.title + '» ещё не создан — ни для этого урока, ни в шаблоне Lesson 01.' +
+        '</div></div>';
         panelsHtml += '</div>';
         return;
       }
+      var prompt = res.prompt;
       var filled = fillPrompt(lesson, prompt.promptText);
       var pid = 'prompt-' + lesson.id + '-' + pt.id;
+      var templateNote = res.fromTemplate
+        ? '<div style="font-family:var(--mono);font-size:10px;color:var(--ochre);padding:8px 16px;background:var(--paper-2);border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:0.12em">▲ шаблон из Lesson 01 · подставлены тексты и словарь урока L·' + String(lesson.number).padStart(2,'0') + '</div>'
+        : '';
       panelsHtml += '<div class="prompt-card">' +
+        templateNote +
         '<div class="prompt-instr">' + esc(prompt.instruction || '') + '</div>' +
         '<div class="prompt-actions">' +
           '<button class="copy-btn" onclick="copyText(this,\'' + pid + '\')">📋 Скопировать промт</button>' +
